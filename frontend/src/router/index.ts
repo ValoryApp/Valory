@@ -12,7 +12,7 @@ const router = createRouter({
       path: '/configurator',
       name: 'Configurator',
       component: () => import('@/views/EditorView.vue'),
-      meta: { showHeader: true },
+      meta: { showHeader: true, hideHighlight: true },
     },
     {
       path: '/overlay/:overlayID',
