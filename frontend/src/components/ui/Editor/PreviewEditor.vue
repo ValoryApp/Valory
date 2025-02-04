@@ -23,7 +23,8 @@ defineProps<PreviewProps>()
 
 <style lang="scss" scoped>
 .preview {
-  flex: 1;
+  flex: 2;
+  height: 100%;
 
   .preview__container {
     width: auto;

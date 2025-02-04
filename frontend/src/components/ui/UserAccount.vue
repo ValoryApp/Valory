@@ -15,6 +15,7 @@
   background-color: #171717;
   border-radius: 999px;
 
+  z-index: 999;
   border: 1px solid hsla(222, 6%, 30%, 0.25);
 
   display: inline-flex;

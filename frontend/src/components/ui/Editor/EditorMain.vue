@@ -388,8 +388,8 @@ onMounted(() => {
 }
 
 .editor {
-  width: 60vw;
-  height: fit-content;
+  width: 100%;
+  height: 100%;
   background: hsl(0, 0%, 9%);
   border-radius: 8px;
   border: 1px solid hsla(222deg 6% 30% / 0.25);
@@ -403,10 +403,10 @@ onMounted(() => {
 
   .editor__body {
     display: flex;
-    align-items: stretch;
+    align-items: center;
+    height: 100%;
 
     .editor__container {
-      min-height: 485px;
       flex: 1;
 
       .editor__settings {
