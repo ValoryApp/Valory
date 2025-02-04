@@ -63,7 +63,9 @@ onBeforeUnmount(() => {
 <style lang="scss">
 .dropdown {
   position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &-button {
     background: transparent;
