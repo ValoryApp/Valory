@@ -5,6 +5,11 @@ import IconMagicStick from '@/components/icons/IconMagicStick.vue'
 import IconPalette from '@/components/icons/IconPalette.vue'
 import IconValory from '@/components/icons/IconValory.vue'
 import Button from '@/components/ui/ButtonUI.vue'
+import IconTwitch from "@/components/icons/IconTwitch.vue";
+
+const redirectToAuth = () => {
+  window.location.href = "http://localhost:8080/api/auth/twitch/login";
+};
 </script>
 
 <template>
@@ -35,7 +40,10 @@ import Button from '@/components/ui/ButtonUI.vue'
         </div>
         <div class="buttons">
           <Button :disabled="true" variant="outline">{{ $t('landing.buttons.first') }}</Button>
-          <Button @click="$router.push('/configurator')">{{ $t('landing.buttons.second') }}</Button>
+          <Button @click="redirectToAuth">
+            {{ $t('landing.buttons.second') }}
+            <IconTwitch color="#000" :size="15"/>
+          </Button>
         </div>
       </div>
       <Footer />
