@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 const props = defineProps<{
-  checked: boolean
+  checked?: boolean
 }>()
 </script>
 <template>
