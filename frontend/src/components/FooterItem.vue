@@ -3,6 +3,7 @@ import IconGithub from '@/components/icons/IconGithub.vue'
 import IconHeart from '@/components/icons/IconHeart.vue'
 import IconTelegram from '@/components/icons/IconTelegram.vue'
 import IconTwitch from '@/components/icons/IconTwitch.vue'
+import LanguageSwitcher from "@/components/ui/LanguageSwitcher.vue";
 </script>
 
 <template>
@@ -36,6 +37,11 @@ import IconTwitch from '@/components/icons/IconTwitch.vue'
       <li class="social">
         <a class="heart" href="https://www.donationalerts.com/r/haxgun" target="__blank">
           <IconHeart :size="18" />
+        </a>
+      </li>
+      <li class="social">
+        <a>
+          <LanguageSwitcher />
         </a>
       </li>
     </ul>
