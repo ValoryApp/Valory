@@ -8,13 +8,17 @@ const props = defineProps<{
 const isOpen = ref(false)
 const dropdownRef = ref<HTMLElement | null>(null)
 const isDropdownUp = ref(false)
+const isDropdownRight = ref(false)
 
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value
   if (dropdownRef.value) {
     const rect = dropdownRef.value.getBoundingClientRect()
     const screenHeight = window.innerHeight
+    const screenWidth = window.innerWidth
+
     isDropdownUp.value = rect.top > screenHeight / 2
+    isDropdownRight.value = rect.right > screenWidth / 2
   }
 }
 
@@ -42,7 +46,7 @@ onBeforeUnmount(() => {
     </button>
     <!-- Используем v-if для анимации -->
     <Transition name="slide-fade">
-      <ul v-if="isOpen" :class="[dropdownClass, { 'dropdown-menu-up': isDropdownUp }]">
+      <ul v-if="isOpen" :class="[dropdownClass, { 'dropdown-menu-up': isDropdownUp }, { 'dropdown-menu-right': isDropdownRight }]">
         <li v-if="$slots.title" class="title">
           <slot name="title"></slot>
         </li>
@@ -121,6 +125,11 @@ onBeforeUnmount(() => {
       top: auto;
       bottom: 100%;
       margin: 0 0 15px 0;
+    }
+
+    &.dropdown-menu-right {
+      left: auto;
+      right: 0;
     }
   }
 
