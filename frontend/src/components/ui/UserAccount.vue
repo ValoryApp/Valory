@@ -16,7 +16,7 @@
   border-radius: 999px;
 
   z-index: 999;
-  border: 1px solid hsla(222, 6%, 30%, 0.25);
+  box-shadow: 0 0 0 1px hsla(222, 6%, 30%, 0.25);
 
   display: inline-flex;
   align-items: center;
@@ -26,6 +26,16 @@
   position: fixed;
   top: 30px;
   right: 30px;
+
+  transition: .2s all;
+
+  &:hover {
+    box-shadow: 0 0 0 4px hsla(222, 6%, 30%, 0.6);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 4px hsla(222, 6%, 30%, 0.8);
+  }
 
   .avatar {
     display: inline-flex;
