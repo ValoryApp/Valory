@@ -1,8 +1,8 @@
 from datetime import datetime
 from typing import List
 
-from sqlmodel import SQLModel, Field, Relationship
 from sqlalchemy import text
+from sqlmodel import SQLModel, Field, Relationship
 
 
 class UserBase(SQLModel):

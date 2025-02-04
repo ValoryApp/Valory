@@ -52,6 +52,7 @@ async def fetch_user_info(access_token: str) -> Optional[dict | HTTPException]:
         return user_data
     return
 
+
 async def fetch_twitch_token(data: dict) -> dict:
     """
     Fetch an OAuth2 token from Twitch API.
@@ -127,7 +128,6 @@ async def callback(request: Request, session: AsyncSession = Depends(get_session
     user_info = await fetch_user_info(access_token)
 
     if user_info:
-
         statement = select(User).where(User.twitch_id == user_info['id'])
         result = await session.exec(statement)
         user_db = result.first()

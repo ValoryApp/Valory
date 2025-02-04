@@ -23,5 +23,6 @@ async def get_session():
     async with async_session() as session:
         yield session
 
+
 if __name__ == "__main__":
     asyncio.run(init_db())

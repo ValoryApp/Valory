@@ -4,8 +4,8 @@ from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
 from app.database import get_session
-from app.schemas.overlays import OverlayCreate, OverlayResponse, OverlayUpdate
 from app.models.overlays import Overlay
+from app.schemas.overlays import OverlayCreate, OverlayResponse, OverlayUpdate
 
 router = APIRouter()
 
