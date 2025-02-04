@@ -151,7 +151,10 @@ onBeforeUnmount(() => {
   .footer {
     font-size: 12px;
     color: rgb(134, 140, 148);
-    padding: 10px 12px;
+    padding: 12px;
+    margin: -4px;
+    background-color: #111;
+    border-radius: 0 0 6px 6px;
   }
 
   &-item {
