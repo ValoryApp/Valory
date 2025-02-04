@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import IconValory from '@/components/icons/IconValory.vue'
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
+import UserAccount from "@/components/ui/UserAccount.vue";
 </script>
 
 <template>
@@ -18,6 +19,7 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
       </div>
       <div class="right">
         <LanguageSwitcher />
+        <UserAccount />
       </div>
     </div>
   </header>
@@ -106,6 +108,10 @@ header {
     .right {
       position: relative;
       right: 0;
+
+      display: inline-flex;
+      gap: 12px;
+      align-items: center;
     }
   }
 }
