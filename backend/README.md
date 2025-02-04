@@ -62,6 +62,7 @@ These dependencies are automatically installed with the `uv install` command as 
    
    DATABASE_LOGIN=""
    DATABASE_PASSWORD=""
+   DATABASE_IP=""
    DATABASE_PORT=5432
    DATABASE_NAME=""
     ```

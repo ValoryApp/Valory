@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     DATABASE_LOGIN: str = "user"
     DATABASE_PASSWORD: str = "password"
     DATABASE_NAME: str = "database"
+    DATABASE_IP: str = "localhost"
     DATABASE_PORT: int = 5432
 
     model_config = SettingsConfigDict(env_file=ENV_FILE)
@@ -31,7 +32,7 @@ class Settings(BaseSettings):
 
     @property
     def DB_URL(self) -> str:
-        return f"postgresql+asyncpg://{self.DATABASE_LOGIN}:{self.DATABASE_PASSWORD}@localhost:{self.DATABASE_PORT}/{self.DATABASE_NAME}"
+        return f"postgresql+asyncpg://{self.DATABASE_LOGIN}:{self.DATABASE_PASSWORD}@{self.DATABASE_IP}:{self.DATABASE_PORT}/{self.DATABASE_NAME}"
 
 
 settings = Settings()
