@@ -75,7 +75,7 @@ useHead({
       }"
     />
     <Highlights v-if="!$route.meta.hideHighlight" />
-    <UserAccount v-if="!$route.meta.hideHeader"/>
+    <UserAccount v-if="$route.meta.showHeader"/>
     <Suspense>
       <template #fallback>
         <div class="app-loader">

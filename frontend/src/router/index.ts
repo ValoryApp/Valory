@@ -7,12 +7,12 @@ const router = createRouter({
       path: '/',
       name: 'VALORY',
       component: () => import('@/views/HomeView.vue'),
-      meta: { hideHeader: true },
     },
     {
       path: '/configurator',
       name: 'Configurator',
       component: () => import('@/views/EditorView.vue'),
+      meta: { showHeader: true },
     },
     {
       path: '/overlay/:overlayID',
@@ -31,7 +31,7 @@ const router = createRouter({
       path: '/unsupported',
       name: 'Unsupported',
       component: () => import('@/views/UnsupportedView.vue'),
-      meta: { hideHighlight: true, hideHeader: true },
+      meta: { hideHighlight: true },
     },
   ],
 })
