@@ -148,8 +148,6 @@ async def callback(request: Request, session: AsyncSession = Depends(get_session
 
     response = RedirectResponse(url=settings.FRONTEND_URL + "/configurator")
     response.delete_cookie("twitch_state")
-    response.set_cookie(key="access_token", value=access_token, samesite="strict")
-    response.set_cookie(key="refresh_token", value=refresh_token, httponly=True, secure=True, samesite="strict")
 
     return response
 
