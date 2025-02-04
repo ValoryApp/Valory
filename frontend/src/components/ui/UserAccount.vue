@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import DropdownMenuItem from "@/components/ui/DropdownMenu/DropdownMenuItem.vue";
 import DropdownMenu from "@/components/ui/DropdownMenu/DropdownMenu.vue";
+import SettingsIcon from "@/components/icons/SettingsIcon.vue";
+import SupportIcon from "@/components/icons/SupportIcon.vue";
+import LogoutIcon from "@/components/icons/LogoutIcon.vue";
 </script>
 
 <template>
@@ -16,11 +19,18 @@ import DropdownMenu from "@/components/ui/DropdownMenu/DropdownMenu.vue";
       <template #title>
         <span>Hi, Username!</span>
       </template>
-      <DropdownMenuItem>Settings</DropdownMenuItem>
-      <DropdownMenuItem>Feedback</DropdownMenuItem>
-      <DropdownMenuItem>About</DropdownMenuItem>
-      <DropdownMenuItem>Support</DropdownMenuItem>
-      <DropdownMenuItem>Logout</DropdownMenuItem>
+      <DropdownMenuItem>
+        <SettingsIcon :size="16"/>
+        Settings
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        <SupportIcon :size="16"/>
+        Support
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        <LogoutIcon :size="16"/>
+        Logout
+      </DropdownMenuItem>
       <template #footer>
         <span>© 2023-2025 VALORY</span>
       </template>
