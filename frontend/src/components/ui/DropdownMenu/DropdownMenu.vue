@@ -59,6 +59,10 @@ onBeforeUnmount(() => {
             }
           "
         ></slot>
+        <li v-if="$slots.footer" class="separator"></li>
+        <li v-if="$slots.footer" class="footer">
+          <slot name="footer"></slot>
+        </li>
       </ul>
     </Transition>
   </div>
@@ -142,6 +146,12 @@ onBeforeUnmount(() => {
     height: 1px;
     background: hsla(222, 6%, 30%, 0.25);
     margin: 0.25rem -0.25rem;
+  }
+
+  .footer {
+    font-size: 12px;
+    color: rgb(134, 140, 148);
+    padding: 10px 12px;
   }
 
   &-item {
