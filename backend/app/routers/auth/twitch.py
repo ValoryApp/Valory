@@ -1,14 +1,17 @@
 import random
 import string
+from typing import Optional
 from urllib.parse import urlencode
 
 import aiohttp
-from fastapi import APIRouter, HTTPException, Request, Response, Depends
+from fastapi import APIRouter, HTTPException, Request, Depends
 from fastapi.responses import RedirectResponse
+from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
 from app.config import settings
 from app.database import get_session
+from app.models.users import User
 
 router = APIRouter()
 
@@ -22,6 +25,32 @@ def generate_random_string(length: int) -> str:
     """
     return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
+
+async def fetch_user_info(access_token: str) -> Optional[dict | HTTPException]:
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "Client-Id": settings.TWITCH_CLIENT_ID
+    }
+
+    async with aiohttp.ClientSession() as session:
+        async with session.get("https://api.twitch.tv/helix/users", headers=headers) as response:
+            if response.status != 200:
+                raise HTTPException(status_code=response.status, detail="Failed to fetch user info")
+
+            data = await response.json()
+
+    if data and "data" in data and data["data"]:
+        user = data["data"][0]
+
+        user_data = {
+            "id": user['id'],
+            "username": user['login'],
+            "display_name": user["display_name"],
+            "avatar_url": user["profile_image_url"]
+        }
+
+        return user_data
+    return
 
 async def fetch_twitch_token(data: dict) -> dict:
     """
@@ -58,10 +87,70 @@ async def twitch_login() -> RedirectResponse:
     response.set_cookie(
         key="twitch_state",
         value=state,
-        httponly=True,
-        secure=True,
-        samesite="strict",
     )
+    return response
+
+
+@router.get("/callback", summary="Handle Twitch OAuth callback")
+async def callback(request: Request, session: AsyncSession = Depends(get_session)) -> RedirectResponse:
+    """
+    Handles the Twitch OAuth2 callback and exchanges the authorization code for an access token.
+
+    :param request: FastAPI Request object.
+    :param response: FastAPI Response object.
+    :param session: AsyncSession dependency for database operations.
+    :return: RedirectResponse to frontend with stored tokens.
+    """
+
+    if not request.query_params:
+        raise HTTPException(status_code=400, detail="No query parameters received")
+
+    code = request.query_params.get("code")
+    state = request.query_params.get("state")
+    stored_state = request.cookies.get("twitch_state")
+
+    if not code or not state or state != stored_state:
+        raise HTTPException(status_code=400, detail="Invalid or missing state")
+
+    data = {
+        "client_id": settings.TWITCH_CLIENT_ID,
+        "client_secret": settings.TWITCH_CLIENT_SECRET,
+        "code": code,
+        "grant_type": "authorization_code",
+        "redirect_uri": settings.REDIRECT_URI,
+    }
+
+    api_response = await fetch_twitch_token(data)
+    access_token = api_response.get("access_token")
+    refresh_token = api_response.get("refresh_token")
+
+    user_info = await fetch_user_info(access_token)
+
+    if user_info:
+
+        statement = select(User).where(User.twitch_id == user_info['id'])
+        result = await session.exec(statement)
+        user_db = result.first()
+
+        if not user_db:
+            new_user = User(
+                username=user_info['username'],
+                avatar_url=user_info['avatar_url'],
+                twitch_id=user_info['id'],
+                twitch_display_name=user_info['display_name'],
+
+                twitch_access_token=access_token,
+                twitch_refresh_token=refresh_token
+            )
+            session.add(new_user)
+            await session.commit()
+            await session.refresh(new_user)
+
+    response = RedirectResponse(url=settings.FRONTEND_URL + "/configurator")
+    response.delete_cookie("twitch_state")
+    response.set_cookie(key="access_token", value=access_token, samesite="strict")
+    response.set_cookie(key="refresh_token", value=refresh_token, httponly=True, secure=True, samesite="strict")
+
     return response
 
 
@@ -80,52 +169,3 @@ async def refresh_token(refresh_token: str) -> dict:
         "grant_type": "refresh_token",
     }
     return await fetch_twitch_token(data)
-
-
-@router.get("/callback", summary="Handle Twitch OAuth callback")
-async def callback(request: Request, response: Response, session: AsyncSession = Depends(get_session)) -> RedirectResponse:
-    """
-    Handles the Twitch OAuth2 callback and exchanges the authorization code for an access token.
-
-    :param request: FastAPI Request object.
-    :param response: FastAPI Response object.
-    :param session: AsyncSession dependency for database operations.
-    :return: RedirectResponse to frontend with stored tokens.
-    """
-    if not request.query_params:
-        raise HTTPException(status_code=400, detail="No query parameters received")
-
-    code = request.query_params.get("code")
-    state = request.query_params.get("state")
-    stored_state = request.cookies.get("twitch_state")
-
-    if not code or not state or state != stored_state:
-        raise HTTPException(status_code=400, detail="Invalid or missing state")
-
-    response.delete_cookie("twitch_state")
-
-    data = {
-        "client_id": settings.TWITCH_CLIENT_ID,
-        "client_secret": settings.TWITCH_CLIENT_SECRET,
-        "code": code,
-        "grant_type": "authorization_code",
-        "redirect_uri": settings.REDIRECT_URI,
-    }
-
-    api_response = await fetch_twitch_token(data)
-    access_token = api_response.get("access_token")
-    refresh_token = api_response.get("refresh_token")
-
-    # new_user = User(
-    #     access_token=access_token,
-    #     refresh_token=refresh_token
-    # )
-    # session.add(new_user)
-    # await session.commit()
-    # await session.refresh(new_user)
-
-    response = RedirectResponse(url=settings.FRONTEND_URL + "/")
-    response.set_cookie(key="access_token", value=access_token, samesite="strict")
-    response.set_cookie(key="refresh_token", value=refresh_token, httponly=True, secure=True, samesite="strict")
-
-    return response
