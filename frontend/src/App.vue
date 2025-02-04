@@ -75,7 +75,7 @@ useHead({
       }"
     />
     <Highlights v-if="!$route.meta.hideHighlight" />
-    <HeaderItem />
+    <HeaderItem v-if="!$route.meta.hideHeader"/>
     <Suspense>
       <template #fallback>
         <div class="app-loader">

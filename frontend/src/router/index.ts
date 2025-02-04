@@ -7,6 +7,7 @@ const router = createRouter({
       path: '/',
       name: 'VALORY',
       component: () => import('@/views/HomeView.vue'),
+      meta: { hideHeader: true },
     },
     {
       path: '/configurator',
