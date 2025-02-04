@@ -11,6 +11,7 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 
 from app.config import settings
 from app.database import get_session
+from app.models.overlays import Overlay
 from app.models.users import User
 
 router = APIRouter()
@@ -145,6 +146,11 @@ async def callback(request: Request, session: AsyncSession = Depends(get_session
             session.add(new_user)
             await session.commit()
             await session.refresh(new_user)
+
+            overlay = Overlay(user_id=new_user.id)
+            session.add(overlay)
+            await session.commit()
+            await session.refresh(overlay)
 
     response = RedirectResponse(url=settings.FRONTEND_URL + "/configurator")
     response.delete_cookie("twitch_state")
