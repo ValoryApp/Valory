@@ -225,25 +225,6 @@ onMounted(() => {
             </template>
             <ModalSettingsEditor>
               <template #header>
-                <h1 class="title">{{ $t('editor.profile.riotId.title') }}</h1>
-                <p class="description">{{ $t('editor.profile.riotId.description') }}</p>
-              </template>
-              <template #input>
-                <Input
-                  v-model.lazy="riotId"
-                  @blur="getUserPuuid"
-                  placeholder="Riot ID"
-                  style="flex: 2"
-                />
-              </template>
-              <template #footer>
-                <span class="under_description" @click="generateRandomId">
-                  {{ $t('editor.profile.riotId.random') }}
-                </span>
-              </template>
-            </ModalSettingsEditor>
-            <ModalSettingsEditor>
-              <template #header>
                 <h1 class="title">{{ $t('editor.profile.hdevKey.title') }}</h1>
                 <span class="description">
                   {{ $t('editor.profile.hdevKey.description') }}
@@ -260,6 +241,25 @@ onMounted(() => {
               <template #footer>
                 <span class="under_description">
                   {{ $t('editor.profile.hdevKey.instruction-dis') }}
+                </span>
+              </template>
+            </ModalSettingsEditor>
+            <ModalSettingsEditor>
+              <template #header>
+                <h1 class="title">{{ $t('editor.profile.riotId.title') }}</h1>
+                <p class="description">{{ $t('editor.profile.riotId.description') }}</p>
+              </template>
+              <template #input>
+                <Input
+                  v-model.lazy="riotId"
+                  @blur="getUserPuuid"
+                  placeholder="Riot ID"
+                  style="flex: 2"
+                />
+              </template>
+              <template #footer>
+                <span class="under_description" @click="generateRandomId">
+                  {{ $t('editor.profile.riotId.random') }}
                 </span>
               </template>
             </ModalSettingsEditor>
