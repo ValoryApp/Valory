@@ -9,7 +9,6 @@ import Up_plusplus from '@/components/icons/plus/up_plusplus.vue'
 import type { PlayerInformation } from '@/services/overlayService'
 
 interface OverlayProps {
-  valoryLogo?: boolean
   backgroundSwitch?: boolean
   progressSwitch?: boolean
   statisticsSwitch?: boolean
@@ -40,10 +39,6 @@ function getTierClass(tierId: number): string {
 
 <template>
   <div v-if="PlayerInfo" class="overlay">
-    <div v-if="valoryLogo" class="logo">
-      <IconValory :size="16" />
-      <span class="text">VALORY.SU</span>
-    </div>
     <div
       :style="{
         backgroundColor: backgroundSwitch ? `${backgroundColor}99` : 'transparent',
