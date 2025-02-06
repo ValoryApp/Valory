@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import IconValory from '@/components/icons/IconValory.vue'
 import Down from '@/components/icons/plus/down.vue'
 import Down_plus from '@/components/icons/plus/down_plus.vue'
 import Down_plusplus from '@/components/icons/plus/down_plusplus.vue'
@@ -382,6 +381,7 @@ function getTierClass(tierId: number): string {
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
     z-index: 2;
+    filter: drop-shadow(0 0 10px rgba(97, 196, 185, 0.5));
   }
 }
 </style>

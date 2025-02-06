@@ -31,7 +31,7 @@ const currentLocale = useLocalStorage<string>('valory-locale', 'en')
       </template>
       <template #button>
         <Icon :icon="`flag:${$t('flag')}-4x3`" height="18" width="18" />
-<!--        {{ $t('languageName') }}-->
+        <!--        {{ $t('languageName') }}-->
       </template>
     </DropdownMenu>
   </div>

@@ -3,7 +3,7 @@ import IconGithub from '@/components/icons/IconGithub.vue'
 import IconHeart from '@/components/icons/IconHeart.vue'
 import IconTelegram from '@/components/icons/IconTelegram.vue'
 import IconTwitch from '@/components/icons/IconTwitch.vue'
-import LanguageSwitcher from "@/components/ui/LanguageSwitcher.vue";
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
 </script>
 
 <template>

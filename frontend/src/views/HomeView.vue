@@ -3,16 +3,16 @@ import Footer from '@/components/FooterItem.vue'
 import IconBillCheck from '@/components/icons/IconBillCheck.vue'
 import IconMagicStick from '@/components/icons/IconMagicStick.vue'
 import IconPalette from '@/components/icons/IconPalette.vue'
+import IconTwitch from '@/components/icons/IconTwitch.vue'
 import IconValory from '@/components/icons/IconValory.vue'
 import Button from '@/components/ui/ButtonUI.vue'
-import IconTwitch from "@/components/icons/IconTwitch.vue";
-import { useAuthStore } from "@/stores/auth";
+import { useAuthStore } from '@/stores/auth'
 
-const authStore = useAuthStore();
+const authStore = useAuthStore()
 
 const redirectToAuth = () => {
-  window.location.href = "http://localhost:8080/api/auth/twitch/login";
-};
+  window.location.href = 'http://localhost:8080/api/auth/twitch/login'
+}
 </script>
 
 <template>
@@ -48,7 +48,7 @@ const redirectToAuth = () => {
           </Button>
           <Button v-else @click="redirectToAuth">
             {{ $t('landing.buttons.second.unauth') }}
-            <IconTwitch color="#000" :size="15"/>
+            <IconTwitch color="#000" :size="15" />
           </Button>
         </div>
       </div>

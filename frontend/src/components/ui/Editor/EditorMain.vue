@@ -296,12 +296,12 @@ onMounted(() => {
                   </span>
                   <Switch v-model="progressSwitch" :disabled="!backgroundSwitch" />
                 </div>
-<!--                <div class="item">-->
-<!--                  <span>-->
-<!--                    {{ $t('editor.configuration.display.items.statistics') }}-->
-<!--                  </span>-->
-<!--                  <Switch v-model="statisticsSwitch" />-->
-<!--                </div>-->
+                <!--                <div class="item">-->
+                <!--                  <span>-->
+                <!--                    {{ $t('editor.configuration.display.items.statistics') }}-->
+                <!--                  </span>-->
+                <!--                  <Switch v-model="statisticsSwitch" />-->
+                <!--                </div>-->
               </template>
             </ModalSettingsEditor>
             <ModalSettingsEditor>

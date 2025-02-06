@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import DropdownMenuItem from "@/components/ui/DropdownMenu/DropdownMenuItem.vue";
-import DropdownMenu from "@/components/ui/DropdownMenu/DropdownMenu.vue";
-import SettingsIcon from "@/components/icons/SettingsIcon.vue";
-import SupportIcon from "@/components/icons/SupportIcon.vue";
-import LogoutIcon from "@/components/icons/LogoutIcon.vue";
-import {useAuthStore} from "@/stores/auth";
+import LogoutIcon from '@/components/icons/LogoutIcon.vue'
+import SettingsIcon from '@/components/icons/SettingsIcon.vue'
+import SupportIcon from '@/components/icons/SupportIcon.vue'
+import DropdownMenu from '@/components/ui/DropdownMenu/DropdownMenu.vue'
+import DropdownMenuItem from '@/components/ui/DropdownMenu/DropdownMenuItem.vue'
+import { useAuthStore } from '@/stores/auth'
 
-const authStore = useAuthStore();
+const authStore = useAuthStore()
 </script>
 
 <template>
@@ -15,7 +15,11 @@ const authStore = useAuthStore();
       <template #button>
         <div class="user_account">
           <div class="avatar">
-            <img width="40px" src="https://static-cdn.jtvnw.net/jtv_user_pictures/a917baec-006e-4ee8-a89a-6f8fda5b09a0-profile_image-300x300.png" alt="">
+            <img
+              width="40px"
+              src="https://static-cdn.jtvnw.net/jtv_user_pictures/a917baec-006e-4ee8-a89a-6f8fda5b09a0-profile_image-300x300.png"
+              alt=""
+            />
           </div>
         </div>
       </template>
@@ -23,15 +27,15 @@ const authStore = useAuthStore();
         <span>Hi, Username!</span>
       </template>
       <DropdownMenuItem>
-        <SettingsIcon :size="16"/>
+        <SettingsIcon :size="16" />
         Settings
       </DropdownMenuItem>
       <DropdownMenuItem>
-        <SupportIcon :size="16"/>
+        <SupportIcon :size="16" />
         Support
       </DropdownMenuItem>
       <DropdownMenuItem @click="authStore.logout()">
-        <LogoutIcon :size="16"/>
+        <LogoutIcon :size="16" />
         Logout
       </DropdownMenuItem>
       <template #footer>
@@ -53,7 +57,6 @@ const authStore = useAuthStore();
   background-color: #171717;
   border-radius: 999px;
 
-
   box-shadow: 0 0 0 1px hsla(222, 6%, 30%, 0.25);
 
   display: inline-flex;
@@ -61,7 +64,7 @@ const authStore = useAuthStore();
   justify-content: center;
   gap: 12px;
 
-  transition: .2s all;
+  transition: 0.2s all;
 
   &:hover {
     box-shadow: 0 0 0 4px hsla(222, 6%, 30%, 0.6);

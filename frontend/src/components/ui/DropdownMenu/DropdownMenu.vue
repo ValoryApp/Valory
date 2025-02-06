@@ -46,7 +46,14 @@ onBeforeUnmount(() => {
     </button>
     <!-- Используем v-if для анимации -->
     <Transition name="slide-fade">
-      <ul v-if="isOpen" :class="[dropdownClass, { 'dropdown-menu-up': isDropdownUp }, { 'dropdown-menu-right': isDropdownRight }]">
+      <ul
+        v-if="isOpen"
+        :class="[
+          dropdownClass,
+          { 'dropdown-menu-up': isDropdownUp },
+          { 'dropdown-menu-right': isDropdownRight },
+        ]"
+      >
         <li v-if="$slots.title" class="title">
           <slot name="title"></slot>
         </li>

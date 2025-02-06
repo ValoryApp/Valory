@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import IconValory from '@/components/icons/IconValory.vue'
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
-import UserAccount from "@/components/ui/UserAccount.vue";
+import UserAccount from '@/components/ui/UserAccount.vue'
 </script>
 
 <template>
