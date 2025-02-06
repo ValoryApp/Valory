@@ -1,5 +1,5 @@
 import apiClient from './apiClient'
-import { useSettingsStore } from '@/stores/settingsStore'
+import { useSettingsStore } from '@/stores/settings'
 
 const settingsStore = useSettingsStore()
 

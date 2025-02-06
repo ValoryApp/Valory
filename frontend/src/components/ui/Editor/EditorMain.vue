@@ -14,7 +14,7 @@ import { getInformation } from '@/services/overlayService'
 import type { PlayerInformation } from '@/services/overlayService'
 import { checkApiKey } from '@/services/statusService'
 import { getPuuidWithRegion } from '@/services/userService'
-import { useSettingsStore } from '@/stores/settingsStore'
+import { useSettingsStore } from '@/stores/settings'
 import { computed, onMounted, ref, watch } from 'vue'
 import { toast } from 'vue-sonner'
 

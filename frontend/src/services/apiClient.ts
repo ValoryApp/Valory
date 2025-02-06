@@ -1,4 +1,4 @@
-import { useSettingsStore } from '@/stores/settingsStore.ts'
+import { useSettingsStore } from '@/stores/settings.ts'
 import axios from 'axios'
 
 const apiClient = axios.create({

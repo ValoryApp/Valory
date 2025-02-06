@@ -1,5 +1,5 @@
 import apiClient from '@/services/apiClient'
-import { useSettingsStore } from '@/stores/settingsStore'
+import { useSettingsStore } from '@/stores/settings'
 import type { AxiosResponse } from 'axios'
 
 const settingsStore = useSettingsStore()
