@@ -4,6 +4,9 @@ import DropdownMenu from "@/components/ui/DropdownMenu/DropdownMenu.vue";
 import SettingsIcon from "@/components/icons/SettingsIcon.vue";
 import SupportIcon from "@/components/icons/SupportIcon.vue";
 import LogoutIcon from "@/components/icons/LogoutIcon.vue";
+import {useAuthStore} from "@/stores/auth";
+
+const authStore = useAuthStore();
 </script>
 
 <template>
@@ -27,7 +30,7 @@ import LogoutIcon from "@/components/icons/LogoutIcon.vue";
         <SupportIcon :size="16"/>
         Support
       </DropdownMenuItem>
-      <DropdownMenuItem>
+      <DropdownMenuItem @click="authStore.logout()">
         <LogoutIcon :size="16"/>
         Logout
       </DropdownMenuItem>
