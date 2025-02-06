@@ -17,6 +17,8 @@ class UserBase(SQLModel):
 
     twitch_access_token: str = Field(default=None, nullable=True)
     twitch_refresh_token: str = Field(default=None, nullable=True)
+    twitch_expires_in: int = Field(default=None, nullable=True)
+    twitch_token_type: str = Field(default=None, nullable=True)
 
     created_at: datetime = Field(
         default_factory=lambda: datetime.now(),

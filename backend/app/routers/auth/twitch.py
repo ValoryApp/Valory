@@ -4,7 +4,7 @@ from typing import Optional
 from urllib.parse import urlencode
 
 import aiohttp
-from fastapi import APIRouter, HTTPException, Request, Depends
+from fastapi import APIRouter, HTTPException, Request, Depends, Response
 from fastapi.responses import RedirectResponse
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
@@ -94,7 +94,7 @@ async def twitch_login() -> RedirectResponse:
 
 
 @router.get("/callback", summary="Handle Twitch OAuth callback")
-async def callback(request: Request, session: AsyncSession = Depends(get_session)) -> RedirectResponse:
+async def callback(request: Request, response: Response, session: AsyncSession = Depends(get_session)) -> RedirectResponse:
     """
     Handles the Twitch OAuth2 callback and exchanges the authorization code for an access token.
 
@@ -123,8 +123,11 @@ async def callback(request: Request, session: AsyncSession = Depends(get_session
     }
 
     api_response = await fetch_twitch_token(data)
+
     access_token = api_response.get("access_token")
     refresh_token = api_response.get("refresh_token")
+    expires_in = int(api_response.get("expires_in"))
+    token_type = api_response.get("token_type")
 
     user_info = await fetch_user_info(access_token)
 
@@ -141,7 +144,9 @@ async def callback(request: Request, session: AsyncSession = Depends(get_session
                 twitch_display_name=user_info['display_name'],
 
                 twitch_access_token=access_token,
-                twitch_refresh_token=refresh_token
+                twitch_refresh_token=refresh_token,
+                twitch_expires_in=expires_in,
+                twitch_token_type=token_type
             )
             session.add(new_user)
             await session.commit()
