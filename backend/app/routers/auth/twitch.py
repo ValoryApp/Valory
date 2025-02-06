@@ -157,10 +157,15 @@ async def callback(request: Request, response: Response, session: AsyncSession =
             await session.commit()
             await session.refresh(overlay)
 
-    response = RedirectResponse(url=settings.FRONTEND_URL + "/configurator")
     response.delete_cookie("twitch_state")
 
-    return response
+    redirect_url = (
+        f"{settings.FRONTEND_URL}/callback"
+        f"?access_token={access_token}"
+        f"&expires_in={expires_in}"
+    )
+
+    return RedirectResponse(url=redirect_url)
 
 
 @router.post("/refresh", summary="Refresh Twitch OAuth token")

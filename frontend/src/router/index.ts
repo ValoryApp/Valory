@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from "@/stores/auth";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,7 +13,7 @@ const router = createRouter({
       path: '/configurator',
       name: 'Configurator',
       component: () => import('@/views/EditorView.vue'),
-      meta: { showHeader: true, hideHighlight: true },
+      meta: { showHeader: true, hideHighlight: true, requiresAuth: true },
     },
     {
       path: '/overlay/:overlayID',
@@ -20,6 +21,10 @@ const router = createRouter({
       component: () => import('@/views/OverlayView.vue'),
       meta: { hideHighlight: true },
       props: (route) => ({ overlayID: route.params.overlayID }),
+    },
+    {
+      path: '/callback',
+      component: () => import('@/views/CallbackView.vue'),
     },
     {
       path: '/:pathMatch(.*)*',
@@ -37,6 +42,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore();
+
   if (typeof to.name === 'string') {
     document.title = to.name
   }
@@ -47,7 +54,13 @@ router.beforeEach((to, from, next) => {
     next({ name: 'Unsupported' })
   } else if (!isMobile && to.name === 'Unsupported') {
     next({ name: 'VALORY' })
-  } else next()
+  } else {
+    if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+      next("/");
+    } else {
+      next();
+    }
+  }
 })
 
 export default router

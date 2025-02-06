@@ -6,6 +6,9 @@ import IconPalette from '@/components/icons/IconPalette.vue'
 import IconValory from '@/components/icons/IconValory.vue'
 import Button from '@/components/ui/ButtonUI.vue'
 import IconTwitch from "@/components/icons/IconTwitch.vue";
+import { useAuthStore } from "@/stores/auth";
+
+const authStore = useAuthStore();
 
 const redirectToAuth = () => {
   window.location.href = "http://localhost:8080/api/auth/twitch/login";
@@ -40,8 +43,11 @@ const redirectToAuth = () => {
         </div>
         <div class="buttons">
           <Button :disabled="true" variant="outline">{{ $t('landing.buttons.first') }}</Button>
-          <Button @click="redirectToAuth">
-            {{ $t('landing.buttons.second') }}
+          <Button v-if="authStore.isAuthenticated" @click="$router.push('/configurator')">
+            {{ $t('landing.buttons.second.auth') }}
+          </Button>
+          <Button v-else @click="redirectToAuth">
+            {{ $t('landing.buttons.second.unauth') }}
             <IconTwitch color="#000" :size="15"/>
           </Button>
         </div>

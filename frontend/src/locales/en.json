@@ -15,7 +15,10 @@
     },
     "buttons": {
       "first": "How does it work?",
-      "second": "Create your overlay"
+      "second": {
+        "auth": "Create your overlay",
+        "unauth": "Login with Twitch"
+      }
     },
     "languageSwitcher": "Select a language",
     "footer": {
