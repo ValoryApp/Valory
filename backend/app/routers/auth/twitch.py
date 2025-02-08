@@ -29,6 +29,13 @@ def generate_random_string(length: int) -> str:
 
 
 async def fetch_user_info(access_token: str) -> Optional[dict | HTTPException]:
+    """
+    Fetch the Twitch user's information using the provided access token.
+
+    :param access_token: The OAuth2 access token for the Twitch user.
+    :return: A dictionary containing user information (id, username, display_name, avatar_url),
+             or raises an HTTPException if the request fails.
+    """
     headers = {
         "Authorization": f"Bearer {access_token}",
         "Client-Id": settings.TWITCH_CLIENT_ID
@@ -57,7 +64,7 @@ async def fetch_user_info(access_token: str) -> Optional[dict | HTTPException]:
 
 async def fetch_twitch_token(data: dict) -> dict:
     """
-    Fetch an OAuth2 token from Twitch API.
+    Fetch an OAuth2 token from the Twitch API.
 
     :param data: Dictionary containing OAuth2 token request parameters.
     :return: JSON response containing the token information.
@@ -73,7 +80,10 @@ async def fetch_twitch_token(data: dict) -> dict:
 @router.get("/login", summary="Initiate Twitch OAuth login")
 async def twitch_login() -> RedirectResponse:
     """
-    Redirects the user to the Twitch OAuth2 authorization URL.
+    Initiates the Twitch OAuth2 login by redirecting the user to the Twitch authorization page.
+
+    This function generates a random state string, stores it in a cookie, and redirects the user to
+    the Twitch authorization URL.
 
     :return: RedirectResponse to the Twitch authorization page.
     """
@@ -99,12 +109,14 @@ async def callback(request: Request, session: AsyncSession = Depends(get_session
     """
     Handles the Twitch OAuth2 callback and exchanges the authorization code for an access token.
 
-    :param request: FastAPI Request object.
-    :param response: FastAPI Response object.
-    :param session: AsyncSession dependency for database operations.
-    :return: RedirectResponse to frontend with stored tokens.
-    """
+    After the user grants permission to the app on Twitch, this function retrieves the authorization
+    code from the query parameters and exchanges it for an access token and refresh token. The
+    access token is then used to fetch the user's information, which is stored in the database.
 
+    :param request: FastAPI Request object containing query parameters.
+    :param session: AsyncSession dependency for database operations.
+    :return: RedirectResponse to the frontend with the access token and additional info.
+    """
     if not request.query_params:
         raise HTTPException(status_code=400, detail="No query parameters received")
 
@@ -182,6 +194,9 @@ async def callback(request: Request, session: AsyncSession = Depends(get_session
 async def refresh_token(refresh_token: str) -> dict:
     """
     Refreshes an expired Twitch OAuth2 access token using a refresh token.
+
+    This endpoint allows the client to obtain a new access token after the old one expires,
+    using the refresh token obtained during the initial authentication.
 
     :param refresh_token: The refresh token obtained from a previous authentication.
     :return: JSON response containing the new access token.
