@@ -95,7 +95,7 @@ async def twitch_login() -> RedirectResponse:
 
 
 @router.get("/callback", summary="Handle Twitch OAuth callback")
-async def callback(request: Request, response: Response, session: AsyncSession = Depends(get_session)) -> RedirectResponse:
+async def callback(request: Request, session: AsyncSession = Depends(get_session)) -> RedirectResponse:
     """
     Handles the Twitch OAuth2 callback and exchanges the authorization code for an access token.
 
@@ -166,15 +166,16 @@ async def callback(request: Request, response: Response, session: AsyncSession =
             await session.commit()
             await session.refresh(overlay)
 
-    response.delete_cookie("twitch_state")
-
     redirect_url = (
         f"{settings.FRONTEND_URL}/callback"
         f"?access_token={access_token}"
         f"&expires_in={expires_in}"
     )
 
-    return RedirectResponse(url=redirect_url)
+    response = RedirectResponse(url=redirect_url)
+    response.delete_cookie("twitch_state")
+
+    return response
 
 
 @router.post("/refresh", summary="Refresh Twitch OAuth token")
