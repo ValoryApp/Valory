@@ -76,6 +76,7 @@ onBeforeUnmount(() => {
   z-index: 1000;
   opacity: 0;
   animation: fadeIn 0.3s forwards;
+  backdrop-filter: blur(5px);
 }
 
 .modal-content {
