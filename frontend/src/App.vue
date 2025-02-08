@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import UserAccount from '@/components/ui/UserAccount.vue'
 import { useHead } from '@unhead/vue'
 import { defineAsyncComponent } from 'vue'
 import { Toaster } from 'vue-sonner'
@@ -75,7 +74,6 @@ useHead({
       }"
     />
     <Highlights v-if="!$route.meta.hideHighlight" />
-    <UserAccount v-if="$route.meta.showHeader" />
     <Suspense>
       <template #fallback>
         <div class="app-loader">
