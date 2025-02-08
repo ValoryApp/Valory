@@ -6,12 +6,13 @@ from urllib.parse import urlencode
 import aiohttp
 from fastapi import APIRouter, HTTPException, Request, Depends, Response
 from fastapi.responses import RedirectResponse
-from sqlmodel import select
-from sqlmodel.ext.asyncio.session import AsyncSession
+from sqlalchemy.future import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import settings
 from app.database import get_session
 from app.models.overlays import Overlay
+from app.models.twitch_oauth import TwitchOauth
 from app.models.users import User
 
 router = APIRouter()
@@ -133,24 +134,32 @@ async def callback(request: Request, response: Response, session: AsyncSession =
 
     if user_info:
         statement = select(User).where(User.twitch_id == user_info['id'])
-        result = await session.exec(statement)
-        user_db = result.first()
+        result = await session.execute(statement)
+        user_db = result.scalars().first()
 
         if not user_db:
             new_user = User(
                 username=user_info['username'],
                 avatar_url=user_info['avatar_url'],
                 twitch_id=user_info['id'],
-                twitch_display_name=user_info['display_name'],
-
-                twitch_access_token=access_token,
-                twitch_refresh_token=refresh_token,
-                twitch_expires_in=expires_in,
-                twitch_token_type=token_type
+                twitch_display_name=user_info['display_name']
             )
+
             session.add(new_user)
             await session.commit()
             await session.refresh(new_user)
+
+            new_oauth = TwitchOauth(
+                user_id=new_user.id,
+                access_token=access_token,
+                refresh_token=refresh_token,
+                expires_in=expires_in,
+                token_type=token_type
+            )
+
+            session.add(new_oauth)
+            await session.commit()
+            await session.refresh(new_oauth)
 
             overlay = Overlay(user_id=new_user.id)
             session.add(overlay)

@@ -1,32 +1,26 @@
 import uuid
 
-from sqlmodel import SQLModel, Field, Relationship
+from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, UUID
+from sqlalchemy.orm import relationship
+
+from app.database import Base
 
 
-class OverlayBase(SQLModel):
-    background_switch: bool = Field(default=True, nullable=False)
-    progressbar_switch: bool = Field(default=True, nullable=False)
-    statistics_switch: bool = Field(default=False, nullable=False)
+class Overlay(Base):
+    __tablename__ = "overlays"
 
-    background_color: str = Field(default="#07090e", nullable=False)
-    text_color: str = Field(default="#ffffff", nullable=False)
-    primary_color: str = Field(default="#bebebf", nullable=False)
-    progressbar_color: str = Field(default="#00ffe3", nullable=False)
-    win_color: str = Field(default="#00ffe3", nullable=False)
-    lose_color: str = Field(default="#ff7986", nullable=False)
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
 
+    background_switch = Column(Boolean, default=True, nullable=False)
+    progressbar_switch = Column(Boolean, default=True, nullable=False)
+    statistics_switch = Column(Boolean, default=False, nullable=False)
 
-class Overlay(OverlayBase, table=True):
-    id: uuid.UUID = Field(
-        default_factory=uuid.uuid4,
-        primary_key=True,
-        nullable=False,
-    )
+    background_color = Column(String, default="#07090e", nullable=False)
+    text_color = Column(String, default="#ffffff", nullable=False)
+    primary_color = Column(String, default="#bebebf", nullable=False)
+    progressbar_color = Column(String, default="#00ffe3", nullable=False)
+    win_color = Column(String, default="#00ffe3", nullable=False)
+    lose_color = Column(String, default="#ff7986", nullable=False)
 
-    user_id: int = Field(foreign_key="user.id", nullable=False)
-
-    user: "User" = Relationship(back_populates="overlays")
-
-
-class OverlayCreate(OverlayBase):
-    pass
+    user = relationship("User", back_populates="overlays")

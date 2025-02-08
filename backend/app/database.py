@@ -1,28 +1,35 @@
-import asyncio
-
-from sqlalchemy.ext.asyncio import create_async_engine
-from sqlalchemy.orm import sessionmaker
-from sqlmodel import SQLModel
-from sqlmodel.ext.asyncio.session import AsyncSession
-
 from app.config import database_url
 
-from app.models import overlays
-from app.models import users
+from datetime import datetime
 
-engine = create_async_engine(database_url, echo=False)
+from sqlalchemy import func, TIMESTAMP, Integer
+from sqlalchemy.ext.asyncio import AsyncAttrs, async_sessionmaker, create_async_engine, AsyncSession
+from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase
 
 
-async def init_db():
-    async with engine.begin() as conn:
-        await conn.run_sync(SQLModel.metadata.create_all)
+engine = create_async_engine(database_url)
 
 
 async def get_session():
-    async_session = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
+    async_session = async_sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
     async with async_session() as session:
         yield session
 
 
-if __name__ == "__main__":
-    asyncio.run(init_db())
+class Base(AsyncAttrs, DeclarativeBase):
+    __abstract__ = True
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+
+    created_at: Mapped[datetime] = mapped_column(
+        TIMESTAMP, server_default=func.now()
+    )
+
+    updated_at: Mapped[datetime] = mapped_column(
+        TIMESTAMP, server_default=func.now(), onupdate=func.now()
+    )
+
+    @classmethod
+    @property
+    def __tablename__(cls) -> str:
+        return cls.__name__.lower() + 's'

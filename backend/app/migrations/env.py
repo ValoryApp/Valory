@@ -5,14 +5,16 @@ from os.path import abspath, dirname
 from alembic import context
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-from sqlmodel import SQLModel
 
 from app.config import database_url
 
+from app.database import Base
+from app.models.users import User
+from app.models.overlays import Overlay
+from app.models.twitch_oauth import TwitchOauth
+
 sys.path.insert(0, dirname(dirname(dirname(abspath(__file__)))))
 
-from app.models.overlays import OverlayBase
-from app.models.users import UserBase
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -29,7 +31,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = SQLModel.metadata
+target_metadata = Base.metadata
 
 
 # other values from the config, defined by the needs of env.py,
