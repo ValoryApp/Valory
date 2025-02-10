@@ -44,5 +44,33 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>Loading...</div>
+  <div class="main">
+    <div class="container">
+      <span class="text">Loading...</span>
+    </div>
+  </div>
 </template>
+
+<style lang="scss" scoped>
+.main {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  margin: auto;
+
+  .container {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    width: 1080px;
+
+    .text {
+      font-weight: 800;
+      font-size: 24px;
+      text-transform: uppercase;
+    }
+  }
+}
+</style>
