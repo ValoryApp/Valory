@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from pydantic import computed_field, HttpUrl
+from pydantic import computed_field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BASE_DIR = Path(__file__).resolve().parents[1]
@@ -14,8 +14,8 @@ class Settings(BaseSettings):
     VERSION: str = "1.0.0"
     DEBUG: bool = False
 
-    FRONTEND_URL: HttpUrl
-    BACKEND_URL: HttpUrl
+    FRONTEND_URL: str
+    BACKEND_URL: str
 
     TWITCH_CLIENT_ID: str
     TWITCH_CLIENT_SECRET: str
