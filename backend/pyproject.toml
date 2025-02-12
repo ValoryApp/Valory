@@ -25,3 +25,48 @@ dependencies = [
 dev = [
     "ruff>=0.9.6",
 ]
+
+[tool.ruff]
+line-length = 120
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "C",    # flake8-comprehensions
+    "B",    # flake8-bugbear
+    "SIM",  # flake8-simplify
+    "UP",   # pyupgrade
+    "PYI",  # flake8-pyi
+    "ARG",  # flake8-unused-arguments
+    "TRY",  # tryceratops
+    "FURB", # refurb
+]
+ignore = [
+    "E501", # line too long
+]
+fix = true
+
+[tool.ruff.format]
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["INP001"]
+
+[tool.ruff.mccabe]
+max-complexity = 10
+
+[tool.ruff.isort]
+combine-as-imports = true
+force-sort-within-sections = true
+lines-between-types = 1
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
+[tool.ruff.flake8-unused-arguments]
+ignore-variadic-names = true
+
+[tool.ruff.flake8-bugbear]
+extend-immutable-calls = ["fastapi.Depends"]
