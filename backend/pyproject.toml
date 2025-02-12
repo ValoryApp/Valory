@@ -20,3 +20,8 @@ dependencies = [
     "uuid>=1.30",
     "uvicorn>=0.34.0",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.9.6",
+]
