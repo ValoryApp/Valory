@@ -1,17 +1,17 @@
 import uuid
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select
 
 from app.database import get_session
 from app.models.overlays import Overlay
-from app.schemas.overlays import OverlayCreate, OverlayResponse, OverlayBase
+from app.schemas.overlays import SOverlayCreate, SOverlayResponse, SOverlay
 
 router = APIRouter()
 
 
-@router.post("/", response_model=OverlayCreate)
-async def create_overlay(overlay: OverlayCreate, session: AsyncSession = Depends(get_session)) -> Overlay:
+@router.post("/", response_model=SOverlayCreate)
+async def create_overlay(overlay: SOverlayCreate, session: AsyncSession = Depends(get_session)) -> Overlay:
     """
     Creates a new overlay in the database.
 
@@ -28,7 +28,7 @@ async def create_overlay(overlay: OverlayCreate, session: AsyncSession = Depends
     return overlay
 
 
-@router.get('/', response_model=list[OverlayResponse])
+@router.get('/', response_model=list[SOverlayResponse])
 async def get_overlays(session: AsyncSession = Depends(get_session)) -> list[Overlay]:
     """
     Retrieves a list of all overlays from the database.
@@ -43,7 +43,7 @@ async def get_overlays(session: AsyncSession = Depends(get_session)) -> list[Ove
     return [overlay for overlay in overlays]
 
 
-@router.get("/{overlay_id}", response_model=OverlayResponse)
+@router.get("/{overlay_id}", response_model=SOverlayResponse)
 async def get_overlay(overlay_id: uuid.UUID, session: AsyncSession = Depends(get_session)) -> Overlay:
     """
     Retrieves a specific overlay by its ID.
@@ -64,10 +64,10 @@ async def get_overlay(overlay_id: uuid.UUID, session: AsyncSession = Depends(get
     return overlay
 
 
-@router.patch("/{overlay_id}", response_model=OverlayResponse)
+@router.patch("/{overlay_id}", response_model=SOverlayResponse)
 async def update_overlay(
         overlay_id: uuid.UUID,
-        overlay_update: OverlayBase,
+        overlay_update: SOverlay,
         session: AsyncSession = Depends(get_session)
 ) -> Overlay:
     """
@@ -98,7 +98,7 @@ async def update_overlay(
 
 
 @router.delete("/{overlay_id}")
-async def delete_overlay(overlay_id: uuid.UUID, session: AsyncSession = Depends(get_session)) -> dict[str, str]:
+async def delete_overlay(overlay_id: uuid.UUID, session: AsyncSession = Depends(get_session)) -> dict[str, bool]:
     """
     Deletes an overlay by its ID.
 
@@ -114,8 +114,8 @@ async def delete_overlay(overlay_id: uuid.UUID, session: AsyncSession = Depends(
     overlay = result.scalars().first()
 
     if not overlay:
-        raise HTTPException(status_code=404, detail="Overlay not found")
+        return {"status": False, "message": "Overlay not found"}
 
     await session.delete(overlay)
     await session.commit()
-    return {"message": "Overlay deleted"}
+    return {"status": True, "message": "Overlay deleted"}

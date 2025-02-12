@@ -3,16 +3,18 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class TwitchOauthBase(BaseModel):
+class STwitchOauth(BaseModel):
     access_token: Optional[str] = None
     refresh_token: Optional[str] = None
     expires_in: Optional[int] = None
     token_type: Optional[str] = None
 
-class TwitchOauthCreate(TwitchOauthBase):
+
+class STwitchOauthCreate(STwitchOauth):
     pass
 
-class TwitchOauthResponse(TwitchOauthBase):
+
+class STwitchOauthResponse(STwitchOauth):
     user_id: int
 
     class Config:

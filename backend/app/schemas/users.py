@@ -2,11 +2,11 @@ from typing import Optional
 
 from pydantic import BaseModel
 
-from app.schemas.overlays import OverlayResponse
-from app.schemas.twitch import TwitchOauthResponse
+from app.schemas.overlays import SOverlayResponse
+from app.schemas.twitch import STwitchOauthResponse
 
 
-class UserBase(BaseModel):
+class SUser(BaseModel):
     username: str
     avatar_url: Optional[str] = None
     twitch_id: Optional[str] = None
@@ -15,13 +15,14 @@ class UserBase(BaseModel):
     hdev_api_key: Optional[str] = None
 
 
-class UserCreate(UserBase):
+class SUserCreate(SUser):
     pass
 
-class UserResponse(UserBase):
+
+class SUserResponse(SUser):
     id: int
-    overlays: list[OverlayResponse] = []
-    twitch_oauth: Optional[TwitchOauthResponse] = None
+    overlays: list[SOverlayResponse] = []
+    twitch_oauth: Optional[STwitchOauthResponse] = None
 
     class Config:
         from_attributes = True
