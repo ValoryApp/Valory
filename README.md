@@ -1,23 +1,22 @@
-<div align="center">
-   <img align="center" width="128px" src="frontend/public/icons/icon-128x128.png" />
-	<h1 align="center"><b>VALORY</b></h1>
-	<p align="center">
-		Powerful and customizable rank overlay tool for Valorant streamers
-        <br>Enhance your stream with sleek visuals and keep your viewers engaged with real-time stats.
-    <br />
-    <a href="https://valory.su"><strong>valory.su »</strong></a>
-    <br />
+<img align="right" width="100" height="120" src="/frontend/public/logo.svg">
+
+# VALORY
 
 [![GitHub License](https://img.shields.io/github/license/haxgun/valory?color=green)](https://github.com/haxgun/valory/blob/main/LICENSE)
 [![Website](https://img.shields.io/website?url=https://valory.su)](https://overlay.haxgun.ru/)
 [![Stars](https://img.shields.io/github/stars/haxgun/Valory?style=flat&color=green)](https://github.com/haxgun/valory/stargazers)
 [![Forks](https://img.shields.io/github/forks/haxgun/Valory?style=flat&color=green)](https://github.com/haxgun/Valory/forks)
 [![Issues](https://img.shields.io/github/issues/haxgun/Valory?style=flat)](https://github.com/haxgun/Valory/issues)
-  </p>
-</div>
+
+Powerful and customizable rank overlay tool for Valorant streamers
+Enhance your stream with sleek visuals and keep your viewers engaged with real-time stats.
+
+<p align="center">
+    <a href="https://valory.su"><strong>valory.su »</strong></a>
+</p>
 
 
-## ✨ Features
+## Features
 
 **Valory** offers a range of features to enhance your streaming experience:
 
@@ -27,7 +26,7 @@
 * **Easy Setup:** Minimal effort required, works out of the box.
 * **Stream Software Integration:** Compatible with OBS, Streamlabs, and more.
 
-## 🛠 Contributing
+## Contributing
 
 We welcome contributions! Here’s how to get involved:
 
@@ -35,7 +34,7 @@ We welcome contributions! Here’s how to get involved:
 2. **Submit Features:** Create a [pull request](https://github.com/haxgun/valory/pulls).
 3. **Share the Love:** Star the repo and spread the word!
 
-## 📜 License
+## License
 
 **Valory** is licensed under the **[MIT License](https://github.com/haxgun/valory/blob/main/LICENSE)**:
 
