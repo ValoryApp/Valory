@@ -1,20 +1,23 @@
 from datetime import datetime
 
 from sqlalchemy import func, TIMESTAMP, Integer
-from sqlalchemy.ext.asyncio import AsyncAttrs, async_sessionmaker, create_async_engine, AsyncSession
+from sqlalchemy.ext.asyncio import (
+    AsyncAttrs,
+    async_sessionmaker,
+    create_async_engine,
+    AsyncSession,
+)
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase
 
 from app.config import database_url
 
 engine = create_async_engine(
-    database_url,
-    pool_pre_ping=True,
-    pool_size=20,
-    max_overflow=10,
-    echo=False
+    database_url, pool_pre_ping=True, pool_size=20, max_overflow=10, echo=False
 )
 
-async_session_factory = async_sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
+async_session_factory = async_sessionmaker(
+    bind=engine, class_=AsyncSession, expire_on_commit=False
+)
 
 
 async def get_session() -> AsyncSession:
@@ -34,9 +37,7 @@ class Base(AsyncAttrs, DeclarativeBase):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
 
-    created_at: Mapped[datetime] = mapped_column(
-        TIMESTAMP, server_default=func.now()
-    )
+    created_at: Mapped[datetime] = mapped_column(TIMESTAMP, server_default=func.now())
 
     updated_at: Mapped[datetime] = mapped_column(
         TIMESTAMP, server_default=func.now(), onupdate=func.now()
@@ -45,4 +46,4 @@ class Base(AsyncAttrs, DeclarativeBase):
     @classmethod
     @property
     def __tablename__(cls) -> str:
-        return cls.__name__.lower() + 's'
+        return cls.__name__.lower() + "s"

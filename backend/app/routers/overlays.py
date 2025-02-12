@@ -11,7 +11,9 @@ router = APIRouter()
 
 
 @router.post("/", response_model=SOverlayCreate)
-async def create_overlay(overlay: SOverlayCreate, session: AsyncSession = Depends(get_session)) -> Overlay:
+async def create_overlay(
+    overlay: SOverlayCreate, session: AsyncSession = Depends(get_session)
+) -> Overlay:
     """
     Creates a new overlay in the database.
 
@@ -28,7 +30,7 @@ async def create_overlay(overlay: SOverlayCreate, session: AsyncSession = Depend
     return overlay
 
 
-@router.get('/', response_model=list[SOverlayResponse])
+@router.get("/", response_model=list[SOverlayResponse])
 async def get_overlays(session: AsyncSession = Depends(get_session)) -> list[Overlay]:
     """
     Retrieves a list of all overlays from the database.
@@ -44,7 +46,9 @@ async def get_overlays(session: AsyncSession = Depends(get_session)) -> list[Ove
 
 
 @router.get("/{overlay_id}", response_model=SOverlayResponse)
-async def get_overlay(overlay_id: uuid.UUID, session: AsyncSession = Depends(get_session)) -> Overlay:
+async def get_overlay(
+    overlay_id: uuid.UUID, session: AsyncSession = Depends(get_session)
+) -> Overlay:
     """
     Retrieves a specific overlay by its ID.
 
@@ -66,9 +70,9 @@ async def get_overlay(overlay_id: uuid.UUID, session: AsyncSession = Depends(get
 
 @router.patch("/{overlay_id}", response_model=SOverlayResponse)
 async def update_overlay(
-        overlay_id: uuid.UUID,
-        overlay_update: SOverlay,
-        session: AsyncSession = Depends(get_session)
+    overlay_id: uuid.UUID,
+    overlay_update: SOverlay,
+    session: AsyncSession = Depends(get_session),
 ) -> Overlay:
     """
     Updates an existing overlay by its ID.
@@ -98,7 +102,9 @@ async def update_overlay(
 
 
 @router.delete("/{overlay_id}")
-async def delete_overlay(overlay_id: uuid.UUID, session: AsyncSession = Depends(get_session)) -> dict[str, bool]:
+async def delete_overlay(
+    overlay_id: uuid.UUID, session: AsyncSession = Depends(get_session)
+) -> dict[str, bool]:
     """
     Deletes an overlay by its ID.
 

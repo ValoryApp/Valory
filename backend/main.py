@@ -35,5 +35,5 @@ if __name__ == "__main__":
         limit_concurrency=1000,
         limit_max_requests=10000,
         timeout_keep_alive=5,
-        access_log=settings.DEBUG
+        access_log=settings.DEBUG,
     )

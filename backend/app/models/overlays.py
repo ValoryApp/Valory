@@ -8,7 +8,9 @@ from app.database import Base
 class Overlay(Base):
     __tablename__ = "overlays"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, nullable=False)
+    id = Column(
+        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, nullable=False
+    )
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
 
     background_switch = Column(Boolean, default=True, nullable=False)

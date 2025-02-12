@@ -22,17 +22,21 @@ async def generate_random_string(length: int) -> str:
     """
     Generates a random alphanumeric string of the given length.
     """
-    return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+    return "".join(random.choices(string.ascii_letters + string.digits, k=length))
 
 
-async def make_request(method: str, url: str, headers: Optional[dict] = None, data: Optional[dict] = None) -> dict:
+async def make_request(
+    method: str, url: str, headers: Optional[dict] = None, data: Optional[dict] = None
+) -> dict:
     """
     Sends an asynchronous HTTP request.
     """
     async with aiohttp.ClientSession() as session:
         async with session.request(method, url, headers=headers, data=data) as response:
             if response.status != 200:
-                raise HTTPException(status_code=response.status, detail=f"Failed request to {url}")
+                raise HTTPException(
+                    status_code=response.status, detail=f"Failed request to {url}"
+                )
             return await response.json()
 
 
@@ -42,9 +46,11 @@ async def fetch_user_info(access_token: str) -> Optional[dict]:
     """
     headers = {
         "Authorization": f"Bearer {access_token}",
-        "Client-Id": settings.TWITCH_CLIENT_ID
+        "Client-Id": settings.TWITCH_CLIENT_ID,
     }
-    data = await make_request("GET", "https://api.twitch.tv/helix/users", headers=headers)
+    data = await make_request(
+        "GET", "https://api.twitch.tv/helix/users", headers=headers
+    )
     return data.get("data", [{}])[0] if data.get("data") else None
 
 
@@ -65,15 +71,19 @@ async def twitch_login() -> RedirectResponse:
         "response_type": "code",
         "client_id": settings.TWITCH_CLIENT_ID,
         "redirect_uri": settings.REDIRECT_URI,
-        "state": state
+        "state": state,
     }
-    response = RedirectResponse(url=f"https://id.twitch.tv/oauth2/authorize?{urlencode(query_params)}")
+    response = RedirectResponse(
+        url=f"https://id.twitch.tv/oauth2/authorize?{urlencode(query_params)}"
+    )
     response.set_cookie("twitch_state", state)
     return response
 
 
 @router.get("/callback", summary="Handle Twitch OAuth callback")
-async def callback(request: Request, session: AsyncSession = Depends(get_session)) -> RedirectResponse:
+async def callback(
+    request: Request, session: AsyncSession = Depends(get_session)
+) -> RedirectResponse:
     """
     Handles the Twitch OAuth callback, exchanges code for tokens, fetches user info, and stores it.
     """
@@ -92,30 +102,31 @@ async def callback(request: Request, session: AsyncSession = Depends(get_session
     user_info = await fetch_user_info(api_response.get("access_token"))
 
     if user_info:
-        statement = select(User).where(User.twitch_id == user_info['id'])
+        statement = select(User).where(User.twitch_id == user_info["id"])
         result = await session.execute(statement)
         user_db = result.scalars().first()
 
         if not user_db:
             new_user = User(
-                username=user_info['login'],
-                avatar_url=user_info['profile_image_url'],
-                twitch_id=user_info['id'],
-                twitch_display_name=user_info['display_name']
+                username=user_info["login"],
+                avatar_url=user_info["profile_image_url"],
+                twitch_id=user_info["id"],
+                twitch_display_name=user_info["display_name"],
             )
             new_oauth = TwitchOauth(
                 user_id=new_user.id,
                 access_token=api_response.get("access_token"),
                 refresh_token=api_response.get("refresh_token"),
                 expires_in=int(api_response.get("expires_in")),
-                token_type=api_response.get("token_type")
+                token_type=api_response.get("token_type"),
             )
             overlay = Overlay(user_id=new_user.id)
             session.add_all([new_user, new_oauth, overlay])
             await session.commit()
 
     response = RedirectResponse(
-        url=f"{settings.FRONTEND_URL}/callback?access_token={api_response.get('access_token')}&expires_in={api_response.get('expires_in')}")
+        url=f"{settings.FRONTEND_URL}/callback?access_token={api_response.get('access_token')}&expires_in={api_response.get('expires_in')}"
+    )
     response.delete_cookie("twitch_state")
     return response
 
