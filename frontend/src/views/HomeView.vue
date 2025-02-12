@@ -11,7 +11,7 @@ import { useAuthStore } from '@/stores/auth'
 const authStore = useAuthStore()
 
 const redirectToAuth = () => {
-  window.location.href = 'http://localhost:8080/api/auth/twitch/login'
+  window.location.href = 'http://localhost:8080/api/auth/login'
 }
 </script>
 
