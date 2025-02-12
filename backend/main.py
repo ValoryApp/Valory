@@ -3,23 +3,37 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
+from app.middlewares.permormance import PerformanceMiddleware
 from app.routers import api_router
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
     description=settings.PROJECT_DESCRIPTION,
     version=settings.VERSION,
+    docs_url=None if settings.DEBUG else "/docs",
+    redoc_url=None if settings.DEBUG else "/redoc",
 )
+
+app.add_middleware(PerformanceMiddleware)
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[settings.FRONTEND_URL],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
 )
 
 app.include_router(api_router, prefix="/api")
 
 if __name__ == "__main__":
-    uvicorn.run(app="main:app", reload=True, port=8080)
+    uvicorn.run(
+        app="main:app",
+        port=8080,
+        reload=settings.DEBUG,
+        workers=4,
+        limit_concurrency=1000,
+        limit_max_requests=10000,
+        timeout_keep_alive=5,
+        access_log=settings.DEBUG
+    )
