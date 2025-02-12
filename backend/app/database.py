@@ -7,13 +7,27 @@ from sqlalchemy.ext.asyncio import AsyncAttrs, async_sessionmaker, create_async_
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase
 
 
-engine = create_async_engine(database_url)
+engine = create_async_engine(
+    database_url,
+    pool_pre_ping=True,
+    pool_size=20,
+    max_overflow=10,
+    echo=False
+)
 
 
-async def get_session():
-    async_session = async_sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
-    async with async_session() as session:
-        yield session
+async_session_factory = async_sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
+
+async def get_session() -> AsyncSession:
+    async with async_session_factory() as session:
+        try:
+            yield session
+            await session.commit()
+        except Exception:
+            await session.rollback()
+            raise
+        finally:
+            await session.close()
 
 
 class Base(AsyncAttrs, DeclarativeBase):
