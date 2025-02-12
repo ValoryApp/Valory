@@ -1,7 +1,5 @@
 <img align="right" width="100" height="120" src="/frontend/public/logo.svg">
 
-<div align="center">  
-
 # VALORY
 
 [![GitHub License](https://img.shields.io/github/license/haxgun/valory?color=green)](https://github.com/haxgun/valory/blob/main/LICENSE)
@@ -9,11 +7,9 @@
 [![Stars](https://img.shields.io/github/stars/haxgun/Valory?style=flat&color=green)](https://github.com/haxgun/valory/stargazers)
 [![Forks](https://img.shields.io/github/forks/haxgun/Valory?style=flat&color=green)](https://github.com/haxgun/Valory/forks)
 [![Issues](https://img.shields.io/github/issues/haxgun/Valory?style=flat)](https://github.com/haxgun/Valory/issues)
-</div>
-<p align="center">
-    Powerful and customizable rank overlay tool for Valorant streamers  
-    Enhance your stream with sleek visuals and keep your viewers engaged with real-time stats.
-</p>
+
+Powerful and customizable rank overlay tool for Valorant streamers  
+Enhance your stream with sleek visuals and keep your viewers engaged with real-time stats.
 <p align="center">
 <a href="https://valory.su"><strong>valory.su »</strong></a>
 </p>
