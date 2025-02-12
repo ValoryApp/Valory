@@ -10,8 +10,8 @@ app = FastAPI(
     title=settings.PROJECT_NAME,
     description=settings.PROJECT_DESCRIPTION,
     version=settings.VERSION,
-    docs_url=None if settings.DEBUG else "/docs",
-    redoc_url=None if settings.DEBUG else "/redoc",
+    docs_url="/docs" if settings.DEBUG else None,
+    redoc_url="/redoc" if settings.DEBUG else None,
 )
 
 app.add_middleware(PerformanceMiddleware)
