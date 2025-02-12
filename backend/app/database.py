@@ -1,11 +1,10 @@
-from app.config import database_url
-
 from datetime import datetime
 
 from sqlalchemy import func, TIMESTAMP, Integer
 from sqlalchemy.ext.asyncio import AsyncAttrs, async_sessionmaker, create_async_engine, AsyncSession
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase
 
+from app.config import database_url
 
 engine = create_async_engine(
     database_url,
@@ -15,8 +14,8 @@ engine = create_async_engine(
     echo=False
 )
 
-
 async_session_factory = async_sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
+
 
 async def get_session() -> AsyncSession:
     async with async_session_factory() as session:

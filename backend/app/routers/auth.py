@@ -6,8 +6,8 @@ from urllib.parse import urlencode
 import aiohttp
 from fastapi import APIRouter, HTTPException, Request, Depends
 from fastapi.responses import RedirectResponse
-from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select
 
 from app.config import settings
 from app.database import get_session

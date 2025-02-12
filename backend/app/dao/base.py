@@ -4,7 +4,6 @@ from sqlalchemy import select
 class BaseDAO:
     model = None
 
-
     @classmethod
     async def find_by_id(cls, session, model_id: int):
         query = select(cls.model).filter_by(id=model_id)
