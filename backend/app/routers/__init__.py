@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.routers import overlays, auth
+from app.routers import auth, overlays
 
 api_router = APIRouter()
 api_router.include_router(overlays.router, prefix="/overlay", tags=["Overlay"])

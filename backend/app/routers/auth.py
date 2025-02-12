@@ -1,10 +1,9 @@
 import random
 import string
-from typing import Optional
 from urllib.parse import urlencode
 
 import aiohttp
-from fastapi import APIRouter, HTTPException, Request, Depends
+from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import RedirectResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
@@ -26,7 +25,7 @@ async def generate_random_string(length: int) -> str:
 
 
 async def make_request(
-    method: str, url: str, headers: Optional[dict] = None, data: Optional[dict] = None
+    method: str, url: str, headers: dict | None = None, data: dict | None = None
 ) -> dict:
     """
     Sends an asynchronous HTTP request.
@@ -40,7 +39,7 @@ async def make_request(
             return await response.json()
 
 
-async def fetch_user_info(access_token: str) -> Optional[dict]:
+async def fetch_user_info(access_token: str) -> dict | None:
     """
     Fetches Twitch user information using the provided access token.
     """

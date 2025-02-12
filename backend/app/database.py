@@ -1,13 +1,13 @@
 from datetime import datetime
 
-from sqlalchemy import func, TIMESTAMP, Integer
+from sqlalchemy import TIMESTAMP, Integer, func
 from sqlalchemy.ext.asyncio import (
     AsyncAttrs,
+    AsyncSession,
     async_sessionmaker,
     create_async_engine,
-    AsyncSession,
 )
-from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 from app.config import database_url
 

@@ -1,10 +1,9 @@
-import sys
 from logging.config import fileConfig
 from os.path import abspath, dirname
+import sys
 
 from alembic import context
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
+from sqlalchemy import engine_from_config, pool
 
 from app.config import database_url
 
