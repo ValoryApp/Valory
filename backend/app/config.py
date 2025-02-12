@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from pydantic import computed_field, HttpUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BASE_DIR = Path(__file__).resolve().parents[1]
@@ -13,8 +14,8 @@ class Settings(BaseSettings):
     VERSION: str = "1.0.0"
     DEBUG: bool = False
 
-    FRONTEND_URL: str
-    BACKEND_URL: str
+    FRONTEND_URL: HttpUrl
+    BACKEND_URL: HttpUrl
 
     TWITCH_CLIENT_ID: str
     TWITCH_CLIENT_SECRET: str
@@ -25,12 +26,14 @@ class Settings(BaseSettings):
     DATABASE_IP: str = "localhost"
     DATABASE_PORT: int = 5432
 
-    model_config = SettingsConfigDict(env_file=ENV_FILE)
+    model_config = SettingsConfigDict(env_file=ENV_FILE, extra="ignore")
 
+    @computed_field
     @property
     def REDIRECT_URI(self) -> str:
         return f"{self.BACKEND_URL}/api/auth/callback"
 
+    @computed_field
     @property
     def DB_URL(self) -> str:
         return f"postgresql+asyncpg://{self.DATABASE_LOGIN}:{self.DATABASE_PASSWORD}@{self.DATABASE_IP}:{self.DATABASE_PORT}/{self.DATABASE_NAME}"
