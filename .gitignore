@@ -78,3 +78,5 @@ Pipfile.lock
 /backend/.python-version
 /backend/.env
 /backend/uv.lock
+
+__pycache__
