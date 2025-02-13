@@ -7,10 +7,16 @@ interface UserState {
 }
 
 export const useUserStore = defineStore('user', {
-  state: (): UserState => ({
-    isAuthenticated: false,
-    token: null,
-  }),
+  state: (): UserState => {
+    const token = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('Authorization='))
+      ?.split('=')[1] || null;
+    return {
+      isAuthenticated: token !== null,
+      token: token,
+    };
+  },
   actions: {
     setToken(token: string) {
       this.token = token;
@@ -19,7 +25,8 @@ export const useUserStore = defineStore('user', {
     logout() {
       this.token = null;
       this.isAuthenticated = false;
-      router.push('/')
+      document.cookie = 'Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      router.push('/');
     }
   },
 });
