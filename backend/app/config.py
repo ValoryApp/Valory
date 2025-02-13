@@ -3,7 +3,7 @@ from pathlib import Path
 from pydantic import computed_field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-BASE_DIR = Path(__file__).resolve().parents[1]
+BASE_DIR = Path(__file__).resolve().parents[2]
 ENV_FILE = BASE_DIR / ".env"
 LOG_FILE_PATH = BASE_DIR / "log.txt"
 
@@ -14,8 +14,11 @@ class Settings(BaseSettings):
     VERSION: str = "1.0.0"
     DEBUG: bool = False
 
-    FRONTEND_URL: str
-    BACKEND_URL: str
+    SECRET_KEY: str
+    ALGORITHM: str
+
+    APP_FRONTEND_URL: str
+    APP_BACKEND_URL: str
 
     TWITCH_CLIENT_ID: str
     TWITCH_CLIENT_SECRET: str
@@ -31,7 +34,7 @@ class Settings(BaseSettings):
     @computed_field
     @property
     def REDIRECT_URI(self) -> str:
-        return f"{self.BACKEND_URL}/api/auth/callback"
+        return f"{self.APP_BACKEND_URL}/api/auth/callback"
 
     @computed_field
     @property

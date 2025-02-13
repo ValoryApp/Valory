@@ -1,47 +1,28 @@
 <script setup lang="ts">
-import { useAuthStore } from '@/stores/auth'
-import { onMounted } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import axios from 'axios'
+import { useUserStore } from '@/stores/auth';
+import { useRouter } from 'vue-router';
 import IconLoading2 from "@/components/icons/IconLoading2.vue";
 
-const authStore = useAuthStore()
-const router = useRouter()
-const route = useRoute()
+const userStore = useUserStore();
+const router = useRouter();
 
-const validateToken = async (token: string) => {
-  try {
-    const response = await axios.get('https://id.twitch.tv/oauth2/validate', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    return response.status === 200
-  } catch (error) {
-    console.error('Ошибка проверки токена:', error)
-    return false
-  }
+// Функция для получения значения cookie по имени
+const getCookie = (name: string): string | null => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
+  return null;
+};
+
+// Получаем токен из cookie после перенаправления
+const token = getCookie('Authorization');
+if (token) {
+  userStore.setToken(token);
+  router.push('/configurator');
+} else {
+  console.error('Токен не найден в cookie');
+  router.push('/');
 }
-
-onMounted(async () => {
-  const accessToken = route.query.access_token as string
-  const expiresIn = Number(route.query.expires_in)
-
-  if (accessToken) {
-    const isValid = await validateToken(accessToken)
-
-    if (isValid) {
-      authStore.setTokens(accessToken, expiresIn)
-      router.push('/configurator')
-    } else {
-      console.error('Недействительный токен')
-      router.push('/')
-    }
-  } else {
-    console.error('Ошибка авторизации')
-    router.push('/')
-  }
-})
 </script>
 
 <template>

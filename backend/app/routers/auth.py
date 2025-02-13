@@ -3,16 +3,13 @@ import string
 from urllib.parse import urlencode
 
 import aiohttp
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from fastapi.responses import RedirectResponse
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
 
 from app.config import settings
 from app.database import get_session
-from app.models.overlays import Overlay
-from app.models.twitch_oauth import TwitchOauth
-from app.models.users import User
+from app.utils.auth import authenticate_user, create_access_token
 
 router = APIRouter()
 
@@ -53,11 +50,19 @@ async def fetch_user_info(access_token: str) -> dict | None:
     return data.get("data", [{}])[0] if data.get("data") else None
 
 
-async def fetch_twitch_token(data: dict) -> dict:
+async def fetch_twitch_token(code: str) -> dict:
     """
     Fetches an OAuth2 token from the Twitch API.
     """
-    return await make_request("POST", "https://id.twitch.tv/oauth2/token", data=data)
+    token_data = {
+        "client_id": settings.TWITCH_CLIENT_ID,
+        "client_secret": settings.TWITCH_CLIENT_SECRET,
+        "code": code,
+        "grant_type": "authorization_code",
+        "redirect_uri": settings.REDIRECT_URI,
+    }
+
+    return await make_request("POST", "https://id.twitch.tv/oauth2/token", data=token_data)
 
 
 @router.get("/login", summary="Initiate Twitch OAuth login")
@@ -79,66 +84,33 @@ async def twitch_login() -> RedirectResponse:
     return response
 
 
-@router.get("/callback", summary="Handle Twitch OAuth callback")
-async def callback(
-    request: Request, session: AsyncSession = Depends(get_session)
-) -> RedirectResponse:
+@router.get("/callback", summary="Handle Twitch OAuth callback", response_model=None)
+async def callback(request: Request, session: AsyncSession = Depends(get_session)) -> HTTPException | RedirectResponse:
     """
     Handles the Twitch OAuth callback, exchanges code for tokens, fetches user info, and stores it.
     """
     code, state = request.query_params.get("code"), request.query_params.get("state")
     if not code or state != request.cookies.get("twitch_state"):
-        raise HTTPException(status_code=400, detail="Invalid or missing state")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST)
 
-    token_data = {
-        "client_id": settings.TWITCH_CLIENT_ID,
-        "client_secret": settings.TWITCH_CLIENT_SECRET,
-        "code": code,
-        "grant_type": "authorization_code",
-        "redirect_uri": settings.REDIRECT_URI,
-    }
-    api_response = await fetch_twitch_token(token_data)
+    api_response = await fetch_twitch_token(code)
     user_info = await fetch_user_info(api_response.get("access_token"))
 
-    if user_info:
-        statement = select(User).where(User.twitch_id == user_info["id"])
-        result = await session.execute(statement)
-        user_db = result.scalars().first()
+    user = await authenticate_user(session, user_info)
 
-        if not user_db:
-            new_user = User(
-                username=user_info["login"],
-                avatar_url=user_info["profile_image_url"],
-                twitch_id=user_info["id"],
-                twitch_display_name=user_info["display_name"],
-            )
-            new_oauth = TwitchOauth(
-                user_id=new_user.id,
-                access_token=api_response.get("access_token"),
-                refresh_token=api_response.get("refresh_token"),
-                expires_in=int(api_response.get("expires_in")),
-                token_type=api_response.get("token_type"),
-            )
-            overlay = Overlay(user_id=new_user.id)
-            session.add_all([new_user, new_oauth, overlay])
-            await session.commit()
+    if not user:
+        return HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
 
-    response = RedirectResponse(
-        url=f"{settings.FRONTEND_URL}/callback?access_token={api_response.get('access_token')}&expires_in={api_response.get('expires_in')}"
+    access_token = await create_access_token({"sub": user.id})
+
+    response = RedirectResponse(url=settings.APP_FRONTEND_URL + "/callback")
+    response.set_cookie(
+        "Authorization",
+        value=f"Bearer {access_token}",
+        max_age=1800,
+        expires=1800,
+        samesite="lax",
+        secure=not settings.DEBUG,
     )
     response.delete_cookie("twitch_state")
     return response
-
-
-@router.post("/refresh", summary="Refresh Twitch OAuth token")
-async def refresh_token(refresh_token: str) -> dict:
-    """
-    Refreshes an expired Twitch OAuth2 access token using a refresh token.
-    """
-    token_data = {
-        "client_id": settings.TWITCH_CLIENT_ID,
-        "client_secret": settings.TWITCH_CLIENT_SECRET,
-        "refresh_token": refresh_token,
-        "grant_type": "refresh_token",
-    }
-    return await fetch_twitch_token(token_data)

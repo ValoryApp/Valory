@@ -1,4 +1,4 @@
-from sqlalchemy import select
+from sqlalchemy import select, insert
 
 
 class BaseDAO:
@@ -21,3 +21,10 @@ class BaseDAO:
         query = select(cls.model)
         result = await session.execute(query)
         return result.scalars().all()
+
+    @classmethod
+    async def add(cls, session, **data):
+        query = insert(cls.model).values(**data)
+        await session.execute(query)
+        await session.commit()
+        return query

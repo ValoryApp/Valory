@@ -1,4 +1,4 @@
-import { useAuthStore } from '@/stores/auth'
+import { useUserStore } from "@/stores/auth";
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -42,7 +42,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const authStore = useAuthStore()
+  const userStore = useUserStore()
 
   if (typeof to.name === 'string') {
     document.title = to.name
@@ -55,7 +55,7 @@ router.beforeEach((to, from, next) => {
   } else if (!isMobile && to.name === 'Unsupported') {
     next({ name: 'VALORY' })
   } else {
-    if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    if (to.meta.requiresAuth && !userStore.isAuthenticated) {
       next('/')
     } else {
       next()

@@ -17,4 +17,3 @@ class User(Base):
     hdev_api_key = Column(String, nullable=True)
 
     overlays = relationship("Overlay", back_populates="user")
-    twitch_oauth = relationship("TwitchOauth", back_populates="user")

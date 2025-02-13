@@ -8,5 +8,7 @@ class UsersDAO(BaseDAO):
     model = User
 
     @classmethod
-    def get_user(cls, session, user_id):
-        return session.execute(select(User).where(User.id == user_id)).scalar_one()
+    async def find_by_twitch_id(cls, session, twitch_id):
+        query = select(cls.model).filter_by(twitch_id=twitch_id)
+        result = await session.execute(query)
+        return result.scalars().one_or_none()

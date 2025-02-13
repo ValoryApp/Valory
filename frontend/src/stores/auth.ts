@@ -1,30 +1,25 @@
-import router from '@/router'
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
+import router from "@/router";
 
-export const useAuthStore = defineStore('auth', {
-  state: () => ({
-    accessToken: localStorage.getItem('access_token') || null,
-    expiresIn: Number(localStorage.getItem('expires_in')) || 0,
+interface UserState {
+  isAuthenticated: boolean;
+  token: string | null;
+}
+
+export const useUserStore = defineStore('user', {
+  state: (): UserState => ({
+    isAuthenticated: false,
+    token: null,
   }),
   actions: {
-    setTokens(accessToken: string, expiresIn: number) {
-      this.accessToken = accessToken
-      this.expiresIn = expiresIn
-
-      localStorage.setItem('access_token', accessToken)
-      localStorage.setItem('expires_in', String(expiresIn))
+    setToken(token: string) {
+      this.token = token;
+      this.isAuthenticated = true;
     },
     logout() {
-      this.accessToken = null
-      this.expiresIn = 0
-
-      localStorage.removeItem('access_token')
-      localStorage.removeItem('expires_in')
-
+      this.token = null;
+      this.isAuthenticated = false;
       router.push('/')
-    },
+    }
   },
-  getters: {
-    isAuthenticated: (state) => !!state.accessToken,
-  },
-})
+});
