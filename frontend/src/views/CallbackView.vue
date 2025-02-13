@@ -3,6 +3,7 @@ import { useAuthStore } from '@/stores/auth'
 import { onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import axios from 'axios'
+import IconLoading2 from "@/components/icons/IconLoading2.vue";
 
 const authStore = useAuthStore()
 const router = useRouter()
@@ -46,7 +47,11 @@ onMounted(async () => {
 <template>
   <div class="main">
     <div class="container">
-      <span class="text">Loading...</span>
+      <span class="text">Authorization...</span>
+      <span class="loader">
+        Waiting for response
+        <IconLoading2 color="#0083fc" :size="16"/>
+      </span>
     </div>
   </div>
 </template>
@@ -61,15 +66,30 @@ onMounted(async () => {
 
   .container {
     display: flex;
+    flex-direction: column;
     align-content: center;
     align-items: center;
     justify-content: center;
     width: 1080px;
+    gap: 12px;
 
     .text {
-      font-weight: 800;
+      font-weight: 400;
       font-size: 24px;
-      text-transform: uppercase;
+    }
+
+    .loader {
+      background: #c0ddff0a;
+      color: #0083fc;
+
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      font-size: 14px;
+
+      padding: 8px 12px;
+      border-radius: 6px;
     }
   }
 }
