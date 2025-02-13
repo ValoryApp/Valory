@@ -10,7 +10,6 @@ from app.config import database_url
 from app.database import Base
 from app.models.users import User
 from app.models.overlays import Overlay
-from app.models.twitch_oauth import TwitchOauth
 
 sys.path.insert(0, dirname(dirname(dirname(abspath(__file__)))))
 
