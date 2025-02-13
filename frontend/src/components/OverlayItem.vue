@@ -23,6 +23,7 @@ interface OverlayProps {
 defineProps<OverlayProps>()
 
 function getTierClass(tierId: number): string {
+  if (tierId <= 2) return 'unranked'
   if (tierId >= 3 && tierId <= 5) return 'iron'
   if (tierId >= 6 && tierId <= 8) return 'bronze'
   if (tierId >= 9 && tierId <= 11) return 'silver'
@@ -205,7 +206,8 @@ function getTierClass(tierId: number): string {
           align-items: center;
           justify-content: center;
 
-          .iron {
+
+          .iron, .unranked {
             filter: drop-shadow(0 0 20px rgba(148, 148, 148, 0.5));
           }
 
