@@ -6,7 +6,6 @@ import IconLoading2 from "@/components/icons/IconLoading2.vue";
 const userStore = useUserStore();
 const router = useRouter();
 
-// Функция для получения значения cookie по имени
 const getCookie = (name: string): string | null => {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -14,7 +13,6 @@ const getCookie = (name: string): string | null => {
   return null;
 };
 
-// Получаем токен из cookie после перенаправления
 const token = getCookie('Authorization');
 if (token) {
   userStore.setToken(token);
