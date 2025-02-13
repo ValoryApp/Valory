@@ -37,7 +37,8 @@ async def authenticate_user(session, user_info: dict):
                 twitch_id=user_info["id"],
                 twitch_display_name=user_info["display_name"],
             )
-            await OverlaysDAO.add(session, user_id=user_info["id"])
+
+            await OverlaysDAO.add(session, user_id=user_db.id)
         return user_db
     else:
         return None
