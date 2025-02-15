@@ -11,10 +11,10 @@ const [firstRow, secondRow] = [STREAMERS_DATA.slice(0, middleIndex), STREAMERS_D
   >
     <UiMarquee
       pause-on-hover
-      class="[--duration:120s]"
+      class="[--duration:180s]"
     >
       <UiStreamersCard
-        v-for="streamer in secondRow"
+        v-for="streamer in firstRow"
         :key="streamer.username"
         :img="streamer.img"
         :username="streamer.username"
@@ -26,7 +26,7 @@ const [firstRow, secondRow] = [STREAMERS_DATA.slice(0, middleIndex), STREAMERS_D
     <UiMarquee
       reverse
       pause-on-hover
-      class="[--duration:120s]"
+      class="[--duration:180s]"
     >
       <UiStreamersCard
         v-for="streamer in secondRow"
