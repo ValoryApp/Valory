@@ -1,5 +1,5 @@
 <template>
-  <MainPageMainSection />
-  <MainPageOpenSourceSection />
+  <MainPageMain/>
+  <MainPageOpenSource/>
 </template>
 
