@@ -3,7 +3,7 @@ import { FOOTER_NAV_PRODUCT_DATA } from "~/data/FooterNav.data";
 import { openLink } from "~/utils/utils";
 </script>
 <template>
-  <footer class="container m-auto flex flex-col gap-10">
+  <footer class="container m-auto flex flex-col gap-10 mt-16">
     <div class="flex justify-between">
       <div class="flex flex-col gap-8">
         <IconsValory :size="25"/>

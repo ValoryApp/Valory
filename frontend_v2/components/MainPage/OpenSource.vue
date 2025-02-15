@@ -13,7 +13,7 @@ const contributorsCount = computed(() => contributorsData.value?.length ?? 0);
 </script>
 
 <template>
-  <section id="source" class="flex h-dvh flex-col items-center justify-center gap-9">
+  <section id="source" class="flex py-16 flex-col items-center justify-center gap-9">
     <IconsSocialsGithub :size="60" class="drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]" />
     <span class="text-6xl font-extrabold drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]">
       Open Source
