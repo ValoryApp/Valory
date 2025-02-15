@@ -78,7 +78,7 @@
       before:blur-[200px]
       before:-z-10"
     >
-      <NuxtImg src="/images/ValoryLogo3D.png" height="320"/>
+      <img src="/images/ValoryLogo3D.png" height="321" alt="Valory 3D"/>
     </div>
   </section>
 </template>
