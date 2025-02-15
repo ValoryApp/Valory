@@ -3,6 +3,14 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: false },
   ssr: false,
+  nitro: {
+    prerender: {
+      routes: [
+        '/_ipx/w_120/ValoryLogo3D.png',
+        '/_ipx/w_140/ValoryLogo3D.png',
+      ]
+    }
+  },
 
   app: {
     head: {
