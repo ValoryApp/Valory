@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { NAV_DATA } from "~/data/HeaderNav.data";
 
-const moveTo = (container: string) => {
-    const scrollTopOffset = document.getElementById(container)!.getBoundingClientRect().top + document.body.scrollTop - 25;
-
+const moveTo = (containerId: string) => {
+  const container = document.getElementById(containerId);
+  if (container) {
+    const scrollTopOffset = container.getBoundingClientRect().top + window.scrollY - 25;
     window.scrollTo({
-        top: scrollTopOffset,
-        left: 0,
-        behavior: "smooth",
+      top: scrollTopOffset - 300,
+      left: 0,
+      behavior: "smooth",
     });
-}
+  }
+};
 </script>
 
 <template>
