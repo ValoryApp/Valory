@@ -51,12 +51,6 @@ export default defineNuxtConfig({
     classSuffix: "",
   },
 
-  hooks: {
-    'prerender:routes' ({ routes }) {
-      routes.clear()
-    }
-  },
-
   imports: {
     imports: [
       {
