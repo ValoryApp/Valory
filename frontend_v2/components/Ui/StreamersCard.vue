@@ -15,16 +15,19 @@ defineProps<Props>();
     class="relative w-64 cursor-pointer overflow-hidden rounded-xl border border-gray-950/[.1] bg-gray-950/[.01] p-4 hover:bg-gray-950/[.05] dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
   >
     <div class="flex flex-row items-center gap-2">
-      <NuxtImg
-        :src="img"
-        class="rounded-full"
-        width="32"
-        height="32"
-        alt=""
-      />
+      <div class="h-fit relative">
+        <NuxtImg
+          :src="img"
+          class="rounded-full"
+          width="32"
+          height="32"
+          alt=""
+        />
+        <span v-if="live" class="bg-green-500 p-1 rounded-xl absolute top-0 right-0"></span>
+      </div>
       <div class="flex flex-col">
         <span class="flex flex-row gap-1 items-center text-sm font-medium dark:text-white">
-          {{ username }}
+          @{{ username }}
           <IconsTwitchVerify v-if="verified" :size="18"/>
         </span>
         <p class="text-xs font-medium dark:text-white/40">{{ followers }} followers</p>
