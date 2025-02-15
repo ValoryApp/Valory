@@ -4,6 +4,12 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: false,
 
+  app: {
+    head: {
+      title: 'VALORY'
+    }
+  },
+
   css: ['@/assets/css/main.css'],
 
   modules: [
