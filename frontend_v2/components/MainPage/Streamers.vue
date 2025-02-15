@@ -9,7 +9,7 @@
       </span>
       <span class="text-center text-[#CECECE] text-base font-normal">
         Top Valorant streamers already showcase their stats with our app.
-        <br>Want to see your name here? Tag us on social media with your stream setup, and we might feature you next!
+        <br>Want to see your name here? Log in to our platform. We might feature you next!
       </span>
       <div class="container">
         <MainPageStreamersMarquee/>
