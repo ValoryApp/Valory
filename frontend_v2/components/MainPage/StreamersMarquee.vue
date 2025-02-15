@@ -14,7 +14,6 @@ const [firstRow, secondRow] = [STREAMERS_DATA.slice(0, middleIndex), STREAMERS_D
       class="[--duration:180s]"
     >
       <UiStreamersCard
-        @click="openLink(`https://twitch.tv/${streamer.username}`)"
         v-for="streamer in firstRow"
         :key="streamer.username"
         :img="streamer.img"
