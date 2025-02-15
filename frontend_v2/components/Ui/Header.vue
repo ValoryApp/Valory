@@ -21,7 +21,7 @@ const moveTo = (container: string) => {
           v-for="nav in NAV_DATA"
           :key="nav.name"
           @click="moveTo(`${nav.point}`)"
-          class="cursor-pointer text-[#F2F2F2]/80 hover:text-[#F2F2F2] transition duration-150"
+          class="cursor-pointer  font-medium text-[#F2F2F2]/80 hover:text-[#F2F2F2] transition duration-150"
         >
           {{ nav.name }}
         </li>

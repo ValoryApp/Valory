@@ -4,6 +4,8 @@
 
 @layer base {
   :root {
+    --duration: 20s;
+    --gap: 1rem;
     --background: #000000;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
