@@ -1,0 +1,5 @@
+<template>
+  <MainPageMainSection />
+  <MainPageOpenSourceSection />
+</template>
+
