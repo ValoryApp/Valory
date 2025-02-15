@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --duration: 20s;
+    --duration: 60s;
     --gap: 1rem;
     --background: #000000;
     --foreground: 240 10% 3.9%;

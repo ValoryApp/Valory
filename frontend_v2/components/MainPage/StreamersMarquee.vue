@@ -1,30 +1,41 @@
+<script setup lang="ts">
+import { STREAMERS_DATA } from "~/data/Streamers.data";
+
+const middleIndex = Math.floor(STREAMERS_DATA.length / 2);
+const [firstRow, secondRow] = [STREAMERS_DATA.slice(0, middleIndex), STREAMERS_DATA.slice(middleIndex)];
+</script>
+
 <template>
   <div
     class="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background md:shadow-xl"
   >
     <UiMarquee
       pause-on-hover
-      class="[--duration:20s]"
+      class="[--duration:120s]"
     >
       <UiStreamersCard
-        v-for="review in secondRow"
-        :key="review.username"
-        :img="review.img"
-        :username="review.username"
-        :followers="review.followers"
+        v-for="streamer in secondRow"
+        :key="streamer.username"
+        :img="streamer.img"
+        :username="streamer.username"
+        :followers="streamer.followers"
+        :live="streamer.live"
+        :verified="streamer.verified"
       />
     </UiMarquee>
     <UiMarquee
       reverse
       pause-on-hover
-      class="[--duration:20s]"
+      class="[--duration:120s]"
     >
       <UiStreamersCard
-        v-for="review in secondRow"
-        :key="review.username"
-        :img="review.img"
-        :username="review.username"
-        :followers="review.followers"
+        v-for="streamer in secondRow"
+        :key="streamer.username"
+        :img="streamer.img"
+        :username="streamer.username"
+        :followers="streamer.followers"
+        :live="streamer.live"
+        :verified="streamer.verified"
       />
     </UiMarquee>
     <div
@@ -35,41 +46,3 @@
     ></div>
   </div>
 </template>
-
-<script setup lang="ts">
-const reviews = [
-  {
-    username: "@jack",
-    followers: "1.2k",
-    img: "https://avatar.vercel.sh/jack",
-  },
-  {
-    username: "@jill",
-    followers: "800",
-    img: "https://avatar.vercel.sh/jill",
-  },
-  {
-    username: "@john",
-    followers: "2k",
-    img: "https://avatar.vercel.sh/john",
-  },
-  {
-    username: "@jane",
-    followers: "3k",
-    img: "https://avatar.vercel.sh/jane",
-  },
-  {
-    username: "@jenny",
-    followers: "100",
-    img: "https://avatar.vercel.sh/jenny",
-  },
-  {
-    username: "@james",
-    followers: "99k",
-    img: "https://avatar.vercel.sh/james",
-  },
-];
-
-const firstRow = ref(reviews.slice(0, reviews.length / 2));
-const secondRow = ref(reviews.slice(reviews.length / 2));
-</script>

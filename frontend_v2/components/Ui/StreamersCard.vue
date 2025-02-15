@@ -1,3 +1,15 @@
+<script lang="ts" setup>
+interface Props {
+  img: string;
+  username: string;
+  followers: string;
+  live: boolean,
+  verified: boolean
+}
+
+defineProps<Props>();
+</script>
+
 <template>
   <figure
     class="relative w-64 cursor-pointer overflow-hidden rounded-xl border border-gray-950/[.1] bg-gray-950/[.01] p-4 hover:bg-gray-950/[.05] dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
@@ -11,21 +23,12 @@
         alt=""
       />
       <div class="flex flex-col">
-        <span class="text-sm font-medium dark:text-white">
+        <span class="flex flex-row gap-1 items-center text-sm font-medium dark:text-white">
           {{ username }}
+          <IconsTwitchVerify v-if="verified" :size="18"/>
         </span>
         <p class="text-xs font-medium dark:text-white/40">{{ followers }} followers</p>
       </div>
     </div>
   </figure>
 </template>
-
-<script lang="ts" setup>
-interface Props {
-  img: string;
-  username: string;
-  followers: string;
-}
-
-defineProps<Props>();
-</script>
