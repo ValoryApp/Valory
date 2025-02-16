@@ -32,7 +32,7 @@
       <img src="/images/features.webp" alt="Features" class="h-auto">
     </div>
     <div
-      class="flex flex-col px-12 pt-12 pb-48 rounded-2xl border border-white/10"
+      class="flex flex-col px-12 pt-12 rounded-2xl border border-white/10"
     >
       <div class="flex flex-col gap-5 pr-5">
         <span class="text-xl font-medium">
@@ -45,6 +45,7 @@
           <br>a professional look.
         </span>
       </div>
+      <img src="/images/configuration.webp" alt="configuration">
     </div>
     <div
       class="flex flex-col px-12 pt-12 pb-48 rounded-2xl border border-white/10"
