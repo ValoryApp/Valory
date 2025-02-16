@@ -3,7 +3,7 @@
 </script>
 
 <template>
-<div class="container flex flex-col gap-10 justify-center items-center">
+<section id="features" class="container flex flex-col gap-10 justify-center items-center">
   <div class="flex flex-col gap-6 items-center">
     <span class="font-bold uppercase text-xs bg-gradient-to-r from-[#5AB2F7] to-[#12CFF3] text-transparent bg-clip-text inline-block">
       Features
@@ -69,7 +69,7 @@
       </div>
     </div>
   </div>
-</div>
+</section>
 </template>
 
 <style scoped>
