@@ -6,7 +6,7 @@ const moveTo = (containerId: string) => {
   if (container) {
     const scrollTopOffset = container.getBoundingClientRect().top + window.scrollY - 25;
     window.scrollTo({
-      top: scrollTopOffset - 300,
+      top: scrollTopOffset - 70,
       left: 0,
       behavior: "smooth",
     });
