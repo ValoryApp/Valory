@@ -4,37 +4,40 @@ interface Child {
 }
 
 export interface FooterNavData {
+  id: number,
   title: string;
-  childrens: Child[];
+  items: Child[];
 }
 
 export const FOOTER_NAV_PRODUCT_DATA: FooterNavData[] = [
   {
-    title: 'Product',
-    childrens: [
+    id: 1,
+    title: 'product',
+    items: [
       {
-        name: 'About us',
+        name: 'about',
         url: '/about',
       },
       {
-        name: 'Contact us',
+        name: 'contact',
         url: '/contact',
       },
       {
-        name: 'Terms of Service',
+        name: 'terms',
         url: '/terms',
       },
     ]
   },
   {
-    title: 'Possibilities',
-    childrens: [
+    id: 2,
+    title: 'possibilities',
+    items: [
       {
-        name: 'How it work',
+        name: 'how',
         url: '/how',
       },
       {
-        name: 'Be a better streamer!',
+        name: 'better',
         url: '/login',
       },
     ]

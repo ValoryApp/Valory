@@ -17,7 +17,6 @@
       }
 
       const particleCount = 50 * (timeLeft / duration);
-      // since particles fall down, start a bit higher than random
       useConfetti({
         ...defaults,
         particleCount,
@@ -46,24 +45,22 @@
           v-wave
         >
           <IconsSocialsDiscord :size="16"/>
-          Be part of our Discord family!
+          {{ $t('main.discord') }}
         </span>
       </Sparkles>
-      <span class="text-5xl font-black uppercase">
-        The ultimate tool
-        <br> for STREAM.
+      <span class="text-5xl font-black uppercase whitespace-pre-line">
+        {{ $t('main.title') }}
       </span>
-      <span class="text-base text-[#CECECE]">
-        Show your Valorant stats effortlessly.
-        <br> Engage your audience and keep the focus on the game
+      <span class="text-base text-[#CECECE] whitespace-pre-line">
+        {{ $t('main.subtitle') }}
       </span>
       <span class="flex gap-3">
         <UiButton>
-          Let’s start!
+          {{ $t('main.buttons.first') }}
           <IconsStart :size="16" color="#000"/>
         </UiButton>
         <UiButton variant="ghost">
-          How does it work?
+          {{ $t('main.buttons.second') }}
           <IconsStars :size="16"/>
         </UiButton>
       </span>

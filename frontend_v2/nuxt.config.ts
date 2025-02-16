@@ -1,17 +1,13 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: false },
   ssr: false,
-
   app: {
     head: {
       title: 'VALORY'
     }
   },
-
   css: ['@/assets/css/main.css'],
-
   modules: [
     "@nuxtjs/tailwindcss",
     "@nuxtjs/color-mode",
@@ -21,8 +17,19 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     "@nuxt/image",
     "v-wave/nuxt",
+    "nuxt-i18n-micro",
   ],
-
+  i18n: {
+    locales: [
+      { code: 'en', iso: 'en-US', dir: 'ltr', displayName: 'English' },
+      { code: 'ru', iso: 'ru-RU', dir: 'ltr', displayName: 'Русский' },
+    ],
+    defaultLocale: 'en',
+    fallbackLocale: 'en',
+    localeCookie: 'lang',
+    translationDir: 'locales',
+    meta: true,
+  },
   googleFonts: {
     families: {
       Inter: '200..900',
@@ -33,28 +40,23 @@ export default defineNuxtConfig({
     download: true,
     inject: true,
   },
-
   tailwindcss: {
     exposeConfig: true,
     editorSupport: true,
   },
-
   colorMode: {
     classSuffix: "",
   },
-
   hooks: {
     'prerender:routes' ({ routes }) {
       routes.clear()
     }
   },
-
   router: {
     options: {
       hashMode: false,
     }
   },
-
   imports: {
     imports: [
       {
@@ -68,4 +70,7 @@ export default defineNuxtConfig({
       },
     ],
   },
+  nitro: {
+    preset: 'bun'
+  }
 });

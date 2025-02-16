@@ -31,7 +31,7 @@ defineProps<Props>();
           @{{ username }}
           <IconsTwitchVerify v-if="verified" :size="18"/>
         </span>
-        <p class="text-xs font-medium dark:text-white/40">{{ followers }} followers</p>
+        <p class="text-xs font-medium dark:text-white/40">{{ followers }} {{ $t('streamers.card.followers') }}</p>
       </div>
     </div>
   </figure>

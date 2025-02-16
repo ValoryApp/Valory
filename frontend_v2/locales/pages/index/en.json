@@ -1,0 +1,77 @@
+{
+  "lang": "English",
+  "nav": {
+    "features": "Features",
+    "streamers": "Streamers",
+    "source": "Open Source",
+    "language": "Language",
+    "login": "Try for free"
+  },
+  "main": {
+    "discord": "Be part of our Discord family!",
+    "title": "The ultimate tool\nfor STREAM.",
+    "subtitle": "Show your Valorant stats effortlessly.\nEngage your audience and keep the focus on the game",
+    "buttons": {
+      "first": "Let's start!",
+      "second": "How does it work?"
+    }
+  },
+  "features": {
+    "category": "Features",
+    "title": "Everything You Need to Elevate Your Stream",
+    "subtitle": " Packed with powerful tools, our app makes it effortless to display and\ncustomize your Valorant stats. From seamless setup to full\npersonalization, we’ve got everything to make your stream shine.",
+    "blocks": {
+      "first": {
+        "title": "Compatible with Popular Streaming Software",
+        "description": "We support all major streaming platforms,\nincluding OBS Studio, Streamlabs, XSplit, and more.\nIntegration is quick and easy, ensuring your stats\nare live without technical hassle."
+      },
+      "second": {
+        "title": "Design Reflects Your Style",
+        "description": "Make your stream yours!\nCustomize overlay colors and layout to match\nyour unique style and stand out with\na professional look."
+      },
+      "third": {
+        "title": "Set It and Forget It",
+        "description": "Enjoy a hassle-free experience!\nOnce you set up the overlay, the app works\nautomatically to display your live stats,\nensuring everything stays updated\nwithout requiring manual adjustments."
+      }
+    }
+  },
+  "streamers": {
+    "category": "LEGENDS",
+    "title": "Streamers Spotlight",
+    "subtitle": "Top Valorant streamers already showcase their stats with our app.\nWant to see your name here? Log in to our platform. We might feature you next!",
+    "card": {
+      "followers": "followers"
+    }
+  },
+  "source": {
+    "title": "Open Source",
+    "subtitle": "Our application's source code is fully accessible on GitHub.\nWe welcome everyone to view, utilize, and contribute to its development.",
+    "contribute": "Contribute"
+  },
+  "footer": {
+    "left": {
+      "description": "Showcase your Valorant stats live and keep your\naudience engaged with every headshot and clutch! "
+    },
+    "right": {
+      "sections": {
+        "first": {
+          "title": "Product",
+          "items": {
+            "about": "About us",
+            "contact": "Contact us",
+            "terms": "Terms of Service"
+          }
+        },
+        "second": {
+          "title": "Possibilities",
+          "items": {
+            "how": "How it work?",
+            "better": "Be a better streamer!"
+          }
+        }
+      }
+    },
+    "copyright": "All rights reserved.",
+    "love": "Made with ❤\uFE0F on \uD83C\uDF0E Earth"
+  }
+}

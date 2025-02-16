@@ -7,11 +7,11 @@
     --duration: 60s;
     --gap: 1rem;
     --background: #000000;
-    --foreground: 240 10% 3.9%;
+    --foreground: #F2F2F2;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --popover: #000000;
+    --popover-foreground: #F2F2F2;
     --primary: #F2F2F2;
     --primary-foreground: #000000;
     --secondary: 240 4.8% 95.9%;
@@ -22,7 +22,7 @@
     --accent-foreground: #F2F2F2;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
+    --border: rgba(242, 242, 242, 0.1);
     --input: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
     --radius: 0.5rem;

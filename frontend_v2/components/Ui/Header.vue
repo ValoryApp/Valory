@@ -25,16 +25,17 @@ const moveTo = (containerId: string) => {
           @click="moveTo(`${nav.point}`)"
           class="cursor-pointer  font-medium text-[#F2F2F2]/80 hover:text-[#F2F2F2] transition duration-150"
         >
-          {{ nav.name }}
+          {{ $t(`nav.${nav.point}`) }}
         </li>
       </ul>
     </div>
     <div class="logo absolute left-1/2">
       <IconsValory :size="30"/>
     </div>
-    <div class="right">
+    <div class="right flex flex-row gap-2 items-center">
+      <UiLanguageSwitcher/>
       <UiButton class="text-sm" size="sm">
-        Try for free
+        {{ $t('nav.login') }}
         <IconsSocialsTwitch :size="16" color="#000"/>
       </UiButton>
     </div>

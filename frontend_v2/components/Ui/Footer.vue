@@ -7,9 +7,8 @@ import { openLink } from "~/utils/utils";
     <div class="flex justify-between">
       <div class="flex flex-col gap-8">
         <IconsValory :size="25"/>
-        <span class=" font-normal">
-          Showcase your Valorant stats live and keep your
-          <br>audience engaged with every headshot and clutch!
+        <span class="font-normal whitespace-pre-line">
+          {{ $t('footer.left.description') }}
         </span>
         <div class="flex gap-4">
           <UiButton @click="openLink('https://github.com/ValoryApp/Valory')" variant="ghost" class="p-2 h-fit cursor-pointer">
@@ -36,24 +35,24 @@ import { openLink } from "~/utils/utils";
           class="flex flex-col gap-2"
         >
           <span class="font-bold text-base">
-            {{ nav.title }}
+            {{ $t(`footer.right.sections.${nav.id === 1 ? 'first' : 'second'}.title`) }}
           </span>
           <ul class="flex flex-col gap-2">
             <NuxtLink
-              v-for="children in nav.childrens"
-              :key="children.name"
-              :to="children.url"
+              v-for="item in nav.items"
+              :key="item.name"
+              :to="item.url"
               class="font-normal text-base text-[#A9A9A9] hover:text-[#F2F2F2] transition duration-150"
             >
-              {{ children.name }}
+              {{ $t(`footer.right.sections.${nav.id === 1 ? 'first' : 'second'}.items.${item.name}`) }}
             </NuxtLink>
           </ul>
         </div>
       </div>
     </div>
     <div class="flex py-10 items-center justify-between border-t border-white/20">
-      <span class="text-normal">Valory © All rights reserved</span>
-      <span class="text-normal">Made with ❤️ on 🌎 Earth</span>
+      <span class="text-normal">Valory © {{ $t('footer.copyright') }}</span>
+      <span class="text-normal">{{ $t('footer.love') }}</span>
     </div>
   </footer>
 </template>
