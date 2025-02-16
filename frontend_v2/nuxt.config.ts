@@ -49,6 +49,12 @@ export default defineNuxtConfig({
     }
   },
 
+  router: {
+    options: {
+      hashMode: false,
+    }
+  },
+
   imports: {
     imports: [
       {
