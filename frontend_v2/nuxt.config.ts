@@ -18,6 +18,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "v-wave/nuxt",
     "nuxt-i18n-micro",
+    "@nuxtjs/seo"
   ],
   i18n: {
     locales: [
@@ -57,6 +58,9 @@ export default defineNuxtConfig({
       hashMode: false,
     }
   },
+  ogImage: {
+    enabled: false,
+  },
   imports: {
     imports: [
       {
@@ -72,5 +76,5 @@ export default defineNuxtConfig({
   },
   nitro: {
     preset: 'bun'
-  }
+  },
 });
