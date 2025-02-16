@@ -18,7 +18,13 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "v-wave/nuxt",
     "nuxt-i18n-micro",
+    "nuxt-umami"
   ],
+  umami: {
+    id: 'e4411117-0d97-4a72-a9b2-68ccea557a20',
+    host: 'https://cloud.umami.is',
+    autoTrack: true,
+  },
   i18n: {
     locales: [
       { code: 'en', iso: 'en-US', dir: 'ltr', displayName: 'English' },
