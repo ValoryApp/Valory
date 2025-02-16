@@ -147,4 +147,25 @@ export const STREAMERS_DATA: StreamersData[] = [
     live: true,
     verified: false,
   },
+  {
+    username: "pyrolll",
+    followers: "9.8k",
+    img: "https://static-cdn.jtvnw.net/jtv_user_pictures/6e7857d1-be0b-40b2-86f5-c4ee056ae468-profile_image-70x70.png",
+    live: false,
+    verified: true,
+  },
+  {
+    username: "batujnax",
+    followers: "61.6k",
+    img: "https://static-cdn.jtvnw.net/jtv_user_pictures/e7e28c20-3028-4606-9a7c-db6664264d48-profile_image-70x70.png",
+    live: false,
+    verified: true,
+  },
+  {
+    username: "q1ngvl",
+    followers: "2.3k",
+    img: "https://static-cdn.jtvnw.net/jtv_user_pictures/8082d6b8-87c1-4bda-ad25-c5efa1fe2a28-profile_image-70x70.png",
+    live: false,
+    verified: false,
+  }
 ];
