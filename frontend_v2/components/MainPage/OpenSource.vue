@@ -24,11 +24,17 @@ const contributorsCount = computed(() => contributorsData.value?.length ?? 0);
     </span>
     <div class="flex gap-2">
       <UiButton @click="openLink('https://github.com/ValoryApp/Valory')" class="px-6">Contribute ({{ contributorsCount }})</UiButton>
-      <UiButton @click="openLink('https://github.com/ValoryApp/Valory/forks')" class="gap-1 bg-[#333333] px-3 text-[#F2F2F2]">
+      <UiButton
+        @click="openLink('https://github.com/ValoryApp/Valory/forks')"
+        class="gap-1 bg-[#19191A] px-3 text-[#F2F2F2] border border-white/10"
+      >
         <IconsBranch :size="22" />
         {{ forksCount }}
       </UiButton>
-      <UiButton @click="openLink('https://github.com/ValoryApp/Valory/stargazers')" class="gap-1 bg-[#333333] px-3 text-[#F2F2F2]">
+      <UiButton
+        @click="openLink('https://github.com/ValoryApp/Valory/stargazers')"
+        class="gap-1 bg-[#19191A] px-3 text-[#F2F2F2] border border-white/10"
+      >
         <IconsStar color="#E3B341" :size="22" />
         {{ starsCount }}
       </UiButton>
