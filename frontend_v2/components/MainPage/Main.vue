@@ -78,7 +78,7 @@
       before:blur-[200px]
       before:-z-10"
     >
-      <img src="/images/ValoryLogo3D.png" height="321" alt="Valory 3D"/>
+      <img src="/images/ValoryLogo3D.webp" height="321" alt="Valory 3D"/>
     </div>
   </section>
 </template>

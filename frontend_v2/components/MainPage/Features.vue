@@ -1,7 +1,3 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
 <section id="features" class="container flex flex-col gap-10 justify-center items-center">
   <div class="flex flex-col gap-6 items-center">
@@ -33,9 +29,7 @@
           <br>are live without technical hassle.
         </span>
       </div>
-      <div class="">
-        <img src="/images/features.png" alt="Features" width="327">
-      </div>
+      <img src="/images/features.webp" alt="Features" class="h-auto">
     </div>
     <div
       class="flex flex-col px-12 pt-12 pb-48 rounded-2xl border border-white/10"
@@ -71,7 +65,3 @@
   </div>
 </section>
 </template>
-
-<style scoped>
-
-</style>
