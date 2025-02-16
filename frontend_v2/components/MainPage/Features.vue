@@ -17,9 +17,9 @@
       <br>personalization, we’ve got everything to make your stream shine.
     </span>
   </div>
-  <div class="flex flex-col gap-4 items-start content-stretch">
+  <div class="grid grid-cols-[repeat(2,1fr)] grid-rows-[repeat(2,1fr)] gap-4 justify-items-stretch">
     <div
-      class="flex items-center gap-4 content-stretch rounded-2xl border border-white/10"
+      class="row-span-1 col-span-2 w-auto flex flex-row gap-4 self-stretch content-stretch rounded-2xl border border-white/10"
       style="background: radial-gradient(328.59% 136.88% at 98.5% -23.88%, rgba(0, 143, 253, 0.20) 0%, rgba(0, 0, 0, 0.00) 100%), radial-gradient(246.95% 120.87% at 15.83% 173.23%, #008FFD 0%, rgba(0, 0, 0, 0.00) 100%), #000A11;"
     >
       <div class="flex p-12 flex-col justify-center items-start gap-5 content-stretch">
@@ -37,38 +37,35 @@
         <img src="/images/features.png" alt="Features" width="327">
       </div>
     </div>
-    <div class="flex flex-row items-start content-stretch gap-4">
-      <div
-        class="flex flex-col px-12 pt-12 pb-48 rounded-2xl border border-white/10"
-        style="background: radial-gradient(112.64% 112.22% at 8.66% -15.07%, #151515 0%, #000 100%);"
-      >
-        <div class="flex flex-col gap-5 pr-5">
-          <span class="text-xl font-medium">
-            Design Reflects Your Style
-          </span>
-          <span class="text-[#CECECE] text-base font-normal">
-            Make your stream yours!
-            <br>Customize overlay colors and layout to match
-            <br>your unique style and stand out with
-            <br>a professional look.
-          </span>
-        </div>
+    <div
+      class="flex flex-col px-12 pt-12 pb-48 rounded-2xl border border-white/10"
+    >
+      <div class="flex flex-col gap-5 pr-5">
+        <span class="text-xl font-medium">
+          Design Reflects Your Style
+        </span>
+        <span class="text-[#CECECE] text-base font-normal">
+          Make your stream yours!
+          <br>Customize overlay colors and layout to match
+          <br>your unique style and stand out with
+          <br>a professional look.
+        </span>
       </div>
-      <div
-        class="flex flex-col px-12 pt-12 pb-48 rounded-2xl border border-white/10"
-        style="background: radial-gradient(112.64% 112.22% at 8.66% -15.07%, #151515 0%, #000 100%);"
-      >
-        <div class="flex flex-col gap-5 pr-5">
-          <span class="text-xl font-medium">
-            Design Reflects Your Style
-          </span>
-          <span class="text-[#CECECE] text-base font-normal">
-            Make your stream yours!
-            <br>Customize overlay colors and layout to match
-            <br>your unique style and stand out with
-            <br>a professional look.
-          </span>
-        </div>
+    </div>
+    <div
+      class="flex flex-col px-12 pt-12 pb-48 rounded-2xl border border-white/10"
+    >
+      <div class="flex flex-col gap-5 pr-5">
+        <span class="text-xl font-medium">
+          Set It and Forget It
+        </span>
+        <span class="text-[#CECECE] text-base font-normal">
+          Enjoy a hassle-free experience!
+          <br>Once you set up the overlay, the app works
+          <br>automatically to display your live stats,
+          <br>ensuring everything stays updated
+          <br>without requiring manual adjustments.
+        </span>
       </div>
     </div>
   </div>
