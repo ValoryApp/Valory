@@ -24,6 +24,7 @@ export default defineNuxtConfig({
     id: 'e4411117-0d97-4a72-a9b2-68ccea557a20',
     host: 'https://cloud.umami.is',
     autoTrack: true,
+    proxy: 'cloak'
   },
   i18n: {
     locales: [
