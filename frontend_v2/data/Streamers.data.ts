@@ -167,5 +167,40 @@ export const STREAMERS_DATA: StreamersData[] = [
     img: "https://static-cdn.jtvnw.net/jtv_user_pictures/8082d6b8-87c1-4bda-ad25-c5efa1fe2a28-profile_image-70x70.png",
     live: false,
     verified: false,
+  },
+  {
+    username: "4min21sec",
+    followers: "4.7k",
+    img: "https://static-cdn.jtvnw.net/jtv_user_pictures/3108a6cc-47af-486a-b2ad-480bf9c6e2f2-profile_image-70x70.png",
+    live: true,
+    verified: false,
+  },
+  {
+    username: "risoru",
+    followers: "1.6k",
+    img: "https://static-cdn.jtvnw.net/jtv_user_pictures/1011ec1e-aafb-4b9c-b7b6-c643ffe0c241-profile_image-70x70.png",
+    live: true,
+    verified: false,
+  },
+  {
+    username: "m4xikk",
+    followers: "4.3k",
+    img: "https://static-cdn.jtvnw.net/jtv_user_pictures/6e5acd18-7a00-4cd5-b3eb-5f4f1a0dec41-profile_image-70x70.png",
+    live: false,
+    verified: false,
+  },
+  {
+    username: "FIVESKILL",
+    followers: "193.7k",
+    img: "https://static-cdn.jtvnw.net/jtv_user_pictures/3421e7f4-9008-487c-ac8c-10fac5c3165f-profile_image-70x70.png",
+    live: false,
+    verified: true,
+  },
+  {
+    username: "lxnwave",
+    followers: "18.9k",
+    img: "https://static-cdn.jtvnw.net/jtv_user_pictures/2597dacd-2cdf-4a45-a14a-55e4e6ed9126-profile_image-70x70.png",
+    live: false,
+    verified: false,
   }
 ];
